@@ -1,9 +1,12 @@
-<!doctype html>
+const fs = require('fs');
+const path = require('path');
+
+const generatePage = (code, title, message) => `<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>404 - Page Not Found | ShowPay</title>
+    <title>${code} - ${title} | ShowPay</title>
     <meta name="robots" content="noindex, nofollow" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>
@@ -49,9 +52,14 @@
     </style>
   </head>
   <body>
-    <h1>404</h1>
-    <h2>Page Not Found</h2>
-    <p>The page you are looking for does not exist or has been moved.</p>
+    <h1>${code}</h1>
+    <h2>${title}</h2>
+    <p>${message}</p>
     <a href="/">Return to Home</a>
   </body>
-</html>
+</html>`;
+
+fs.writeFileSync(path.join(__dirname, 'public', '404.html'), generatePage('404', 'Page Not Found', 'The page you are looking for does not exist or has been moved.'), 'utf8');
+fs.writeFileSync(path.join(__dirname, 'public', '500.html'), generatePage('500', 'Server Error', 'Our servers are currently experiencing an issue. Please try again later.'), 'utf8');
+
+console.log('Error pages generated successfully.');

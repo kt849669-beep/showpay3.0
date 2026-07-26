@@ -1,3 +1,10 @@
 User-agent: *
 Allow: /
+Disallow: /admin-app/
+Disallow: /admin
+Disallow: /user-app/
+Allow: /user-app/pages/login.html
+Disallow: /database/
+Disallow: /supabase/
+
 Sitemap: https://app-showpay.in/sitemap.xml

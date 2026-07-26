@@ -7,6 +7,7 @@ const sitemapFile = path.join(__dirname, 'public', 'sitemap.xml');
 
 // Public pages to include in the sitemap
 const includePages = ['login.html', 'home.html'];
+const newSeoPages = ['app', 'apk', 'usdt', 'about', 'support', 'faq', 'privacy-policy', 'terms', 'risk-disclosure', 'security'];
 
 function generateSitemap() {
   const currentDate = new Date().toISOString();
@@ -20,6 +21,10 @@ function generateSitemap() {
     if (fs.existsSync(path.join(pagesDir, page))) {
       sitemapContent += `  <url>\n    <loc>${domain}/user-app/pages/${page}</loc>\n    <lastmod>${currentDate}</lastmod>\n    <changefreq>daily</changefreq>\n    <priority>${page === 'login.html' ? '0.9' : '0.8'}</priority>\n  </url>\n`;
     }
+  });
+
+  newSeoPages.forEach(page => {
+    sitemapContent += `  <url>\n    <loc>${domain}/${page}</loc>\n    <lastmod>${currentDate}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>\n`;
   });
 
   sitemapContent += `</urlset>`;

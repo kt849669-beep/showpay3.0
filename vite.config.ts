@@ -27,6 +27,16 @@ export default defineConfig(() => {
       port: 3000,
       host: '0.0.0.0'
     },
+    plugins: [
+      {
+        name: 'dev-server-rewrite',
+        configureServer(server) {
+          server.middlewares.use((req, res, next) => {
+            next();
+          });
+        }
+      }
+    ],
     build: {
       rollupOptions: {
         input: getHtmlFiles(__dirname)

