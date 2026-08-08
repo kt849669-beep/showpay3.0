@@ -58,7 +58,12 @@ function validateJsonLd(html, label) {
 }
 
 const login = read('user-app/pages/login.html');
+const loginStyles = read('user-app/css/login.css');
 expect(login.includes('<h1 class="header">Login</h1>'), 'login: missing visible H1');
+expect(loginStyles.includes('min-height: 100svh'), 'login: first view must fill the small mobile viewport');
+expect(loginStyles.includes('min-height: 100dvh'), 'login: first view must track the dynamic mobile viewport');
+expect(login.includes('history.scrollRestoration = "manual"'), 'login: browser scroll restoration must be disabled');
+expect(login.includes('window.scrollTo(0, 0)'), 'login: page must open at the login view');
 expect(
   headValue(login, 'link', 'rel', 'canonical', 'href') === `${domain}/`,
   'login: canonical must be the root URL',
