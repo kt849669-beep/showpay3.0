@@ -89,19 +89,37 @@ for (const filename of publicPages) {
     headValue(html, 'meta', 'name', 'description', 'content').length >= 70,
     `${label}: missing or short description`,
   );
+  const canonicalRoutes = {
+    'showpay-apk.html': '/showpay-apk',
+    'showpay-usdt.html': '/showpay-usdt',
+  };
   expect(
-    headValue(html, 'link', 'rel', 'canonical', 'href') === `${domain}/${filename}`,
+    headValue(html, 'link', 'rel', 'canonical', 'href') === `${domain}${canonicalRoutes[filename] ?? `/${filename}`}`,
     `${label}: canonical mismatch`,
   );
   expect(/<h1\b[^>]*>[^<]+<\/h1>/i.test(html), `${label}: missing H1`);
   validateJsonLd(html, label);
 }
 
+for (const filename of ['showpay-apk.html', 'showpay-usdt.html']) {
+  expect(
+    read(`public/${filename}`).includes('<a class="cta" href="/">ShowPay Login</a>'),
+    `${filename}: missing ShowPay login CTA`,
+  );
+}
+
 expect(fs.statSync(path.join(root, 'public', 'showpay-logo.png')).size > 0, 'public logo is empty');
 
 const sitemap = read('public/sitemap.xml');
 const sitemapLocations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-const expectedLocations = [`${domain}/`, ...publicPages.map((page) => `${domain}/${page}`)];
+const sitemapRoutes = {
+  'showpay-apk.html': '/showpay-apk',
+  'showpay-usdt.html': '/showpay-usdt',
+};
+const expectedLocations = [
+  `${domain}/`,
+  ...publicPages.map((page) => `${domain}${sitemapRoutes[page] ?? `/${page}`}`),
+];
 expect(
   JSON.stringify(sitemapLocations) === JSON.stringify(expectedLocations),
   `sitemap URLs mismatch: ${sitemapLocations.join(', ')}`,
