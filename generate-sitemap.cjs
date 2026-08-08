@@ -18,7 +18,7 @@ const urls = [
     priority: '0.7',
   },
   {
-    loc: `${domain}/showpay-apk.html`,
+    loc: `${domain}/showpay-apk`,
     source: path.join(__dirname, 'public', 'showpay-apk.html'),
     changefreq: 'monthly',
     priority: '0.8',
@@ -30,7 +30,7 @@ const urls = [
     priority: '0.7',
   },
   {
-    loc: `${domain}/showpay-usdt.html`,
+    loc: `${domain}/showpay-usdt`,
     source: path.join(__dirname, 'public', 'showpay-usdt.html'),
     changefreq: 'monthly',
     priority: '0.7',
