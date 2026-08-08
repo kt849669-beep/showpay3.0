@@ -284,6 +284,16 @@
     <script type="module" src="../js/config/supabase.js"></script>
     <script type="module" src="../js/auth/login.js"></script>
     <script>
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+
+      window.addEventListener("pageshow", () => {
+        if (!window.location.hash) {
+          window.scrollTo(0, 0);
+        }
+      });
+
       lucide.createIcons();
     </script>
   </body>
