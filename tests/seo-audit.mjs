@@ -98,14 +98,17 @@ for (const filename of publicPages) {
     `${label}: canonical mismatch`,
   );
   expect(/<h1\b[^>]*>[^<]+<\/h1>/i.test(html), `${label}: missing H1`);
+  expect(html.includes('class="site-header"'), `${label}: missing ShowPay site header`);
+  expect(html.includes('<a class="cta" href="/">ShowPay Login</a>'), `${label}: missing ShowPay login CTA`);
+  expect(html.includes('class="content-section"'), `${label}: missing detailed content section`);
+  const visibleText = html
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  expect(visibleText.split(' ').length >= 300, `${label}: content is too thin`);
   validateJsonLd(html, label);
-}
-
-for (const filename of ['showpay-apk.html', 'showpay-usdt.html']) {
-  expect(
-    read(`public/${filename}`).includes('<a class="cta" href="/">ShowPay Login</a>'),
-    `${filename}: missing ShowPay login CTA`,
-  );
 }
 
 expect(fs.statSync(path.join(root, 'public', 'showpay-logo.png')).size > 0, 'public logo is empty');
