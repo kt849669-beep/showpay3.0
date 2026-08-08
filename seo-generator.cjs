@@ -58,14 +58,15 @@ const pages = [
   },
   {
     filename: 'showpay-apk.html',
+    route: '/showpay-apk',
     title: 'ShowPay APK and App Access | ShowPay Login',
     description:
       'Find safe ShowPay app access information, sign in through the web login and avoid unverified ShowPay APK download sources.',
     schema: {
       '@context': 'https://schema.org',
       '@type': 'WebPage',
-      '@id': `${domain}/showpay-apk.html#webpage`,
-      url: `${domain}/showpay-apk.html`,
+      '@id': `${domain}/showpay-apk#webpage`,
+      url: `${domain}/showpay-apk`,
       name: 'ShowPay APK and App Access',
       description:
         'Safe access information for the ShowPay app, web login and APK-related searches.',
@@ -79,11 +80,19 @@ const pages = [
     body: `
       <h1>ShowPay App and APK Access</h1>
       <p>The <strong>ShowPay app</strong> can be accessed through the mobile-friendly web login on this domain. This page does not currently host a direct <strong>ShowPay APK</strong> file.</p>
-      <h2>Safe ShowPay login</h2>
-      <p>Use the <a href="/">ShowPay login</a> page in your browser. Check that the address begins with <strong>https://app-showpay.in/</strong> before entering account details.</p>
+      <a class="cta" href="/">ShowPay Login</a>
+      <h2>Using ShowPay on mobile</h2>
+      <p>Open app-showpay.in in a current mobile browser and confirm the domain before signing in. Where supported, you can add the page to your phone's home screen for quicker access without installing a file from an unknown source.</p>
       <h2>Avoid unverified APK files</h2>
-      <p>Do not install files from unknown websites or messages claiming to provide a Show Pay app download. An unverified APK can expose passwords, MPINs or other account information.</p>
-      <p>For account-access questions, visit <a href="/showpay-support.html">ShowPay support</a>.</p>
+      <p>Do not install files from unknown websites or messages claiming to provide a Show Pay app download. Before opening any claimed ShowPay APK, verify that the platform has actually published it and review the requested permissions.</p>
+      <h2>ShowPay login safety</h2>
+      <ul>
+        <li>Confirm the address bar shows app-showpay.in.</li>
+        <li>Never share your password, OTP, MPIN or recovery code.</li>
+        <li>Avoid saving credentials on a shared device.</li>
+        <li>Use only support information shown by the platform.</li>
+      </ul>
+      <p>For account-access questions, visit <a href="/showpay-support.html">ShowPay support</a> or read the <a href="/showpay-usdt">ShowPay USDT guide</a>.</p>
     `,
   },
   {
@@ -129,14 +138,15 @@ const pages = [
   },
   {
     filename: 'showpay-usdt.html',
+    route: '/showpay-usdt',
     title: 'ShowPay USDT Guide | Deposit and Withdrawal Checks',
     description:
       'Use this ShowPay USDT guide to verify networks, wallet addresses and transaction status before a deposit or withdrawal.',
     schema: {
       '@context': 'https://schema.org',
       '@type': 'HowTo',
-      '@id': `${domain}/showpay-usdt.html#howto`,
-      url: `${domain}/showpay-usdt.html`,
+      '@id': `${domain}/showpay-usdt#howto`,
+      url: `${domain}/showpay-usdt`,
       name: 'How to check a ShowPay USDT deposit',
       description:
         'Steps for checking network and address information before a ShowPay USDT transaction.',
@@ -160,15 +170,20 @@ const pages = [
     },
     body: `
       <h1>ShowPay USDT Guide</h1>
-      <p>This guide explains the checks to make before using a USDT feature available in the <strong>ShowPay app</strong>.</p>
+      <p>This guide explains the checks to make before using a USDT feature available in the <strong>ShowPay app</strong>. Confirm the exact network, wallet address, limits and transaction status inside your signed-in account.</p>
+      <a class="cta" href="/">ShowPay Login</a>
       <h2>Before a USDT deposit</h2>
       <ol>
-        <li>Open the <a href="/">ShowPay login</a> page and sign in.</li>
-        <li>Open the available USDT option and verify the displayed network.</li>
-        <li>Compare the full wallet address before sending funds.</li>
+        <li>Use the ShowPay login button above and sign in at app-showpay.in.</li>
+        <li>Open the available USDT option and verify the network displayed in your account.</li>
+        <li>Compare the complete wallet address and review the amount before sending funds.</li>
+        <li>Keep the transaction ID so its status can be checked if processing is delayed.</li>
       </ol>
+      <h2>Before a USDT withdrawal</h2>
+      <p>Verify the recipient address, network, minimum amount and any fee shown in the dashboard. Blockchain transfers may be irreversible, so review every field before submitting.</p>
       <h2>Transaction status</h2>
-      <p>Processing time can vary by network activity and required blockchain confirmations. Review the transaction status shown in your dashboard before taking another action.</p>
+      <p>Processing time can vary by network activity and required blockchain confirmations. Compare the transaction ID with the appropriate blockchain explorer and review the status shown in your dashboard before taking another action.</p>
+      <p class="notice">Never send USDT using an address copied from an unverified message, and never share your password, OTP or MPIN when requesting help.</p>
       <p>For account-access or transaction questions, visit <a href="/showpay-support.html">ShowPay support</a>.</p>
     `,
   },
@@ -364,6 +379,8 @@ const styles = `
       h2 { margin-top: 2rem; }
       a { color: #0369a1; text-underline-offset: 3px; }
       li + li { margin-top: .55rem; }
+      .cta { display: inline-block; margin: .5rem 0 1.25rem; padding: .75rem 1.15rem; border-radius: 10px; background: #0369a1; color: #fff; font-weight: 700; text-decoration: none; }
+      .cta:hover, .cta:focus-visible { background: #075985; }
       .notice { margin-top: 1.5rem; padding: 14px 16px; border-left: 4px solid #0284c7; background: #f0f9ff; }
       .guide-nav { margin-top: 2.25rem; padding-top: 1.25rem; border-top: 1px solid #e5e7eb; }
       .guide-nav a + a { margin-left: 12px; }
@@ -379,7 +396,7 @@ const guideNavigation = `
       </nav>`;
 
 for (const page of pages) {
-  const canonical = `${domain}/${page.filename}`;
+  const canonical = `${domain}${page.route ?? `/${page.filename}`}`;
   const html = `<!doctype html>
 <html lang="en">
   <head>

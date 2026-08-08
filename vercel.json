@@ -8,6 +8,16 @@
       "source": "/login",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/showpay-apk.html",
+      "destination": "/showpay-apk",
+      "permanent": true
+    },
+    {
+      "source": "/showpay-usdt.html",
+      "destination": "/showpay-usdt",
+      "permanent": true
     }
   ],
   "rewrites": [
@@ -22,6 +32,14 @@
     {
       "source": "/admin",
       "destination": "/admin-app/pages/login.html"
+    },
+    {
+      "source": "/showpay-apk",
+      "destination": "/showpay-apk.html"
+    },
+    {
+      "source": "/showpay-usdt",
+      "destination": "/showpay-usdt.html"
     }
   ],
   "headers": [
