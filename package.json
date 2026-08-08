@@ -9,6 +9,7 @@
     "dev": "vite --port=3000 --host=0.0.0.0",
     "build": "vite build",
     "preview": "vite preview",
+    "pretest:seo": "npm run generate:seo",
     "test:seo": "node tests/seo-audit.mjs",
     "test:seo-monitor": "node --test --test-isolation=none seo-monitor/tests/monitor.test.mjs",
     "monitor:seo": "node seo-monitor/run.mjs"
