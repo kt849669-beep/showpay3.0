@@ -8,7 +8,17 @@ function getHtmlFiles(dir, fileList = {}) {
   for (const file of files) {
     const fullPath = resolve(dir, file);
     if (fs.statSync(fullPath).isDirectory()) {
-      if (file !== 'node_modules' && file !== 'dist' && file !== '.git' && file !== '.vercel') {
+      // `public` is Vite's publicDir: everything inside it is copied to the
+      // output root as-is. Adding those files as rollup inputs as well emits a
+      // second copy under dist/public/, which would publish every SEO page on
+      // two crawlable URLs (/showpay-guide.html and /public/showpay-guide.html).
+      if (
+        file !== 'node_modules' &&
+        file !== 'dist' &&
+        file !== '.git' &&
+        file !== '.vercel' &&
+        file !== 'public'
+      ) {
         getHtmlFiles(fullPath, fileList);
       }
     } else if (file.endsWith('.html')) {

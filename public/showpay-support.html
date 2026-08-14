@@ -3,49 +3,98 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ShowPay Support | Login and App Help</title>
-    <meta name="description" content="Get ShowPay login and app help, including password recovery guidance, account-safety tips and USDT transaction checks." />
+    <title>ShowPay Customer Support | Login, App and USDT Help</title>
+    <meta name="description" content="ShowPay customer support answers: Show Pay login problems, app access, password recovery, deposit status and USDT transaction checks." />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <link rel="canonical" href="https://app-showpay.in/showpay-support.html" />
     <link rel="icon" type="image/png" href="/showpay-logo.png" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="ShowPay" />
-    <meta property="og:title" content="ShowPay Support | Login and App Help" />
-    <meta property="og:description" content="Get ShowPay login and app help, including password recovery guidance, account-safety tips and USDT transaction checks." />
+    <meta property="og:title" content="ShowPay Customer Support | Login, App and USDT Help" />
+    <meta property="og:description" content="ShowPay customer support answers: Show Pay login problems, app access, password recovery, deposit status and USDT transaction checks." />
     <meta property="og:url" content="https://app-showpay.in/showpay-support.html" />
     <meta property="og:image" content="https://app-showpay.in/showpay-logo.png" />
     <meta property="og:image:alt" content="ShowPay logo" />
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="ShowPay Support | Login and App Help" />
-    <meta name="twitter:description" content="Get ShowPay login and app help, including password recovery guidance, account-safety tips and USDT transaction checks." />
+    <meta name="twitter:title" content="ShowPay Customer Support | Login, App and USDT Help" />
+    <meta name="twitter:description" content="ShowPay customer support answers: Show Pay login problems, app access, password recovery, deposit status and USDT transaction checks." />
     <meta name="twitter:image" content="https://app-showpay.in/showpay-logo.png" />
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","@id":"https://app-showpay.in/showpay-support.html#faq","url":"https://app-showpay.in/showpay-support.html","name":"ShowPay Support","mainEntity":[{"@type":"Question","name":"How do I recover my ShowPay login?","acceptedAnswer":{"@type":"Answer","text":"Use the password-recovery option shown on the ShowPay login screen and never share your password or MPIN."}},{"@type":"Question","name":"What should I check for a pending ShowPay USDT transaction?","acceptedAnswer":{"@type":"Answer","text":"Confirm the selected network, destination address and blockchain confirmations, then review the status shown in your dashboard."}}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","@id":"https://app-showpay.in/showpay-support.html#faq","url":"https://app-showpay.in/showpay-support.html","name":"ShowPay Customer Support","mainEntity":[{"@type":"Question","name":"How do I recover my ShowPay login?","acceptedAnswer":{"@type":"Answer","text":"Use the password-recovery option shown on the ShowPay login screen and never share your password or MPIN."}},{"@type":"Question","name":"What should I check for a pending ShowPay USDT transaction?","acceptedAnswer":{"@type":"Answer","text":"Confirm the selected network, destination address and blockchain confirmations, then review the status shown in your dashboard."}}]}</script>
     <style>
-      :root { color-scheme: light; font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      :root { color-scheme: light; font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; --brand:#007bff; --brand-dark:#0056b3; --ink:#172033; --muted:#667085; --surface:#fff; --line:#e7edf5; }
       * { box-sizing: border-box; }
-      body { margin: 0; background: #f5f7fa; color: #1f2937; line-height: 1.7; }
-      main { width: min(760px, calc(100% - 32px)); margin: 32px auto; padding: 28px; background: #fff; border-radius: 16px; box-shadow: 0 8px 28px rgba(15, 23, 42, 0.08); }
-      h1, h2, h3 { color: #111827; line-height: 1.25; }
-      h1 { font-size: clamp(1.8rem, 6vw, 2.5rem); }
-      h2 { margin-top: 2rem; }
-      a { color: #0369a1; text-underline-offset: 3px; }
+      html { scroll-behavior: smooth; }
+      body { margin: 0; background: #f5f7fa; color: var(--ink); line-height: 1.72; }
+      .site-header { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.94); border-bottom: 1px solid var(--line); backdrop-filter: blur(12px); }
+      .header-inner { width: min(920px, calc(100% - 32px)); min-height: 64px; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+      .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--brand); font-size: 1.22rem; font-weight: 800; text-decoration: none; letter-spacing: -.02em; }
+      .brand img { width: 34px; height: 34px; border-radius: 9px; object-fit: contain; }
+      .top-login { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 0 18px; border-radius: 10px; background: var(--brand); color: #fff; font-weight: 750; text-decoration: none; }
+      main { width: min(920px, calc(100% - 32px)); margin: 24px auto 40px; padding: clamp(22px, 5vw, 46px); background: var(--surface); border: 1px solid var(--line); border-radius: 22px; box-shadow: 0 14px 44px rgba(26, 80, 140, .08); }
+      .eyebrow { display: inline-flex; margin-bottom: 6px; padding: 6px 11px; border-radius: 999px; background: #eaf4ff; color: var(--brand-dark); font-size: .76rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+      h1, h2, h3 { color: var(--ink); line-height: 1.24; letter-spacing: -.025em; }
+      h1 { max-width: 720px; margin: 12px 0 16px; font-size: clamp(2rem, 7vw, 3.25rem); }
+      h2 { margin-top: 0; font-size: clamp(1.38rem, 4vw, 1.8rem); }
+      h3 { font-size: 1.05rem; }
+      p { color: #3d485c; }
+      a { color: var(--brand-dark); text-underline-offset: 3px; }
       li + li { margin-top: .55rem; }
-      .notice { margin-top: 1.5rem; padding: 14px 16px; border-left: 4px solid #0284c7; background: #f0f9ff; }
+      .cta { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; margin: .55rem 0 1.4rem; padding: 0 22px; border-radius: 12px; background: linear-gradient(135deg, #1e90ff, var(--brand)); color: #fff; font-weight: 800; text-decoration: none; box-shadow: 0 9px 20px rgba(0,123,255,.22); }
+      .cta:hover, .cta:focus-visible, .top-login:hover, .top-login:focus-visible { background: var(--brand-dark); }
+      .content-section { margin-top: 34px; padding-top: 30px; border-top: 1px solid var(--line); }
+      .info-grid, .guide-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 18px; }
+      .info-card, .guide-grid a { padding: 18px; border: 1px solid #dfeaf6; border-radius: 15px; background: #fbfdff; text-decoration: none; }
+      .info-card h3 { margin: 10px 0 5px; }
+      .info-card p { margin: 0; font-size: .94rem; }
+      .card-icon { display: inline-flex; width: 34px; height: 34px; align-items: center; justify-content: center; border-radius: 9px; background: #eaf4ff; color: var(--brand); font-weight: 850; }
+      .guide-grid { grid-template-columns: repeat(2, 1fr); }
+      .guide-grid a { display: flex; flex-direction: column; transition: transform .18s ease, border-color .18s ease; }
+      .guide-grid a:hover { transform: translateY(-2px); border-color: #8dc5ff; }
+      .guide-grid span { color: var(--muted); font-size: .9rem; }
+      .process { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 18px 0; }
+      .process div { display: flex; gap: 12px; padding: 16px; border-radius: 14px; background: #f6faff; border: 1px solid #e2eefb; }
+      .process b { flex: 0 0 30px; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; background: var(--brand); color: #fff; }
+      .process span { display: flex; flex-direction: column; color: var(--muted); font-size: .88rem; line-height: 1.45; }
+      .process strong { color: var(--ink); }
+      .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px; }
+      .comparison div { padding: 18px; border-radius: 14px; background: #f6faff; border: 1px solid #e2eefb; }
+      .comparison span { display: block; margin-top: 4px; color: var(--muted); }
+      .check-list { padding: 0; list-style: none; }
+      .check-list li { position: relative; padding-left: 30px; }
+      .check-list li::before { content: "✓"; position: absolute; left: 0; top: 1px; width: 21px; height: 21px; display: grid; place-items: center; border-radius: 50%; background: #e8f6ee; color: #138a48; font-size: .76rem; font-weight: 900; }
+      .notice { margin-top: 1.5rem; padding: 15px 17px; border-left: 4px solid var(--brand); border-radius: 0 12px 12px 0; background: #f0f8ff; }
       .guide-nav { margin-top: 2.25rem; padding-top: 1.25rem; border-top: 1px solid #e5e7eb; }
       .guide-nav a + a { margin-left: 12px; }
-      @media (max-width: 560px) { main { margin: 16px auto; padding: 20px; border-radius: 12px; } }
+      .site-footer { padding: 0 16px 32px; color: var(--muted); text-align: center; font-size: .86rem; }
+      @media (max-width: 700px) { .info-grid, .process { grid-template-columns: 1fr; } .guide-grid, .comparison { grid-template-columns: 1fr; } }
+      @media (max-width: 560px) { .header-inner { width: min(100% - 24px, 920px); } main { width: min(100% - 20px, 920px); margin: 10px auto 26px; padding: 22px 18px; border-radius: 16px; } .guide-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; } .guide-nav a + a { margin-left: 0; } }
 </style>
   </head>
   <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="/" aria-label="ShowPay home"><img src="/showpay-logo.png" width="34" height="34" alt="" /><span>ShowPay</span></a>
+        <a class="top-login" href="/">Login</a>
+      </div>
+    </header>
     <main>
-<h1>ShowPay Support</h1>
-      <p>Use these steps for common <strong>ShowPay login</strong>, app-access and transaction questions.</p>
+      <span class="eyebrow">ShowPay Help Center</span>
+<h1>ShowPay Customer Support</h1>
+      <p>Use these steps for common <strong>ShowPay login</strong>, app-access and transaction questions. Searches also reach this page as “Show pay customer support” — the spacing does not change the answers below.</p>
       <h2>Frequently asked questions</h2>
       <h3>How do I recover my ShowPay login?</h3>
       <p>Use the password-recovery option shown on the ShowPay login screen. Never share your password or MPIN with another person.</p>
       <h3>What should I check for a pending ShowPay USDT transaction?</h3>
       <p>Confirm the selected network, destination address and blockchain confirmations, then review the status shown in your dashboard.</p>
       <p>For platform information, read <a href="/about-showpay.html">About ShowPay</a>. For safe web-app access, see the <a href="/showpay-apk.html">ShowPay app and APK guide</a>.</p>
+      <a class="cta" href="/">ShowPay Login</a>
+
+      <section class="content-section">
+        <h2>Choose the right help path</h2>
+        <div class="info-grid"><article class="info-card"><h3>Cannot sign in</h3><p>Check the phone number, password and website address, then use the recovery option from the login page.</p></article><article class="info-card"><h3>Deposit is pending</h3><p>Review the dashboard status, payment reference or blockchain transaction ID before trying again.</p></article><article class="info-card"><h3>USDT question</h3><p>Confirm the network, complete address and required confirmations using the current account screen.</p></article></div>
+      </section>
+      <section class="content-section"><h2>Information to keep ready</h2><p>For a clear account or transaction enquiry, keep non-secret details such as the approximate time, displayed status and transaction reference ready. Never include your password, OTP, MPIN, recovery code or full private credentials in a support message.</p><ul class="check-list"><li>Take note of the exact error or status text.</li><li>Confirm whether the issue occurs before or after login.</li><li>For blockchain transfers, keep the public transaction ID.</li><li>Avoid sending the same payment again until its status is clear.</li></ul></section>
+      <section class="content-section"><h2>Account safety reminder</h2><p>A genuine help process should not require your current password or MPIN. If someone asks you to transfer funds to “unlock” support, stop and verify the request through the information available inside your account.</p><p>Keep screenshots limited to the part that shows the error and hide phone numbers, balances, wallet addresses or other private details before sharing them. Clear information helps explain the issue without exposing the account.</p></section>
 
       <nav class="guide-nav" aria-label="ShowPay guide navigation">
         <a href="/showpay-guide.html">All ShowPay guides</a>
@@ -54,5 +103,6 @@
         <a href="/">Login</a>
       </nav>
     </main>
+    <footer class="site-footer">ShowPay public help guides · Always verify the current information inside your account.</footer>
   </body>
 </html>

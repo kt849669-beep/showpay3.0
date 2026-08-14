@@ -96,15 +96,15 @@ const pages = [
   },
   {
     filename: 'showpay-support.html',
-    title: 'ShowPay Support | Login and App Help',
+    title: 'ShowPay Customer Support | Login, App and USDT Help',
     description:
-      'Get ShowPay login and app help, including password recovery guidance, account-safety tips and USDT transaction checks.',
+      'ShowPay customer support answers: Show Pay login problems, app access, password recovery, deposit status and USDT transaction checks.',
     schema: {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
       '@id': `${domain}/showpay-support.html#faq`,
       url: `${domain}/showpay-support.html`,
-      name: 'ShowPay Support',
+      name: 'ShowPay Customer Support',
       mainEntity: [
         {
           '@type': 'Question',
@@ -125,8 +125,8 @@ const pages = [
       ],
     },
     body: `
-      <h1>ShowPay Support</h1>
-      <p>Use these steps for common <strong>ShowPay login</strong>, app-access and transaction questions.</p>
+      <h1>ShowPay Customer Support</h1>
+      <p>Use these steps for common <strong>ShowPay login</strong>, app-access and transaction questions. Searches also reach this page as “Show pay customer support” — the spacing does not change the answers below.</p>
       <h2>Frequently asked questions</h2>
       <h3>How do I recover my ShowPay login?</h3>
       <p>Use the password-recovery option shown on the ShowPay login screen. Never share your password or MPIN with another person.</p>
