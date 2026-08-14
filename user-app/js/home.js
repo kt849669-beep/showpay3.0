@@ -289,8 +289,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   function logout() {
     // Session Clear
     sessionStorage.removeItem("showpay_session");
-    // Redirect to Login Page
-    window.location.href = "../pages/login.html";
+    // Redirect to the login homepage ("/"). This is the canonical login view:
+    // the full login form on the first screen with the ShowPay guides below on
+    // scroll. The old relative path ../pages/login.html resolved to
+    // /pages/login.html, which does not exist and only "worked" because the old
+    // 404 page auto-redirected to /. That auto-redirect was removed (it looked
+    // like a sneaky redirect to Google), so the logout target must be explicit.
+    window.location.href = "/";
   }
 
   // ======================================
