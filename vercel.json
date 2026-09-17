@@ -40,6 +40,10 @@
     {
       "source": "/showpay-usdt",
       "destination": "/showpay-usdt.html"
+    },
+    {
+      "source": "/homepages",
+      "destination": "/homepages.html"
     }
   ],
   "headers": [
