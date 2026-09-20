@@ -15,7 +15,7 @@ const urls = [
     loc: `${domain}/about-showpay.html`,
     source: path.join(__dirname, 'public', 'about-showpay.html'),
     changefreq: 'monthly',
-    priority: '0.7',
+    priority: '0.8',
   },
   {
     loc: `${domain}/showpay-apk`,
@@ -24,46 +24,16 @@ const urls = [
     priority: '0.8',
   },
   {
-    loc: `${domain}/showpay-support.html`,
-    source: path.join(__dirname, 'public', 'showpay-support.html'),
-    changefreq: 'monthly',
-    priority: '0.7',
-  },
-  {
     loc: `${domain}/showpay-usdt`,
     source: path.join(__dirname, 'public', 'showpay-usdt.html'),
     changefreq: 'monthly',
-    priority: '0.7',
+    priority: '0.8',
   },
   {
     loc: `${domain}/showpay-guide.html`,
     source: path.join(__dirname, 'public', 'showpay-guide.html'),
     changefreq: 'monthly',
-    priority: '0.8',
-  },
-  {
-    loc: `${domain}/how-to-use-showpay.html`,
-    source: path.join(__dirname, 'public', 'how-to-use-showpay.html'),
-    changefreq: 'monthly',
-    priority: '0.8',
-  },
-  {
-    loc: `${domain}/how-to-deposit-showpay.html`,
-    source: path.join(__dirname, 'public', 'how-to-deposit-showpay.html'),
-    changefreq: 'monthly',
-    priority: '0.7',
-  },
-  {
-    loc: `${domain}/how-to-deposit-usdt-showpay.html`,
-    source: path.join(__dirname, 'public', 'how-to-deposit-usdt-showpay.html'),
-    changefreq: 'monthly',
-    priority: '0.7',
-  },
-  {
-    loc: `${domain}/showpay-password-help.html`,
-    source: path.join(__dirname, 'public', 'showpay-password-help.html'),
-    changefreq: 'monthly',
-    priority: '0.7',
+    priority: '0.9',
   },
 ];
 

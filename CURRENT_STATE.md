@@ -2,6 +2,12 @@
 
 This file serves as memory for AI agents. When a new conversation starts, read this to understand the current state.
 
+## Recent Updates (September 17, 2026)
+1. **New SEO Page `/homepages`:** Created `public/homepages.html` — a self-contained, production-ready page (CSS + JS inlined, no external deps) adapted from the ChatGPT showpay-seo-preview project. All modifications applied: robots=index/follow, canonical, og:url, og:image, twitter:card, keywords meta, updated title, login banner replacing preview-note, header CTA → ShowPay Login link, hero login button → app-showpay.in, login CTA button on login screenshot card, new login-cta-section before guides, end-panel → ShowPay Login CTA, footer updated.
+2. **vercel.json:** Added `{ "source": "/homepages", "destination": "/homepages.html" }` rewrite rule.
+3. **sitemap.xml:** Added `https://app-showpay.in/homepages` with priority 0.9.
+4. **Build note:** `npm run build` fails locally due to Application Control policy blocking `@rollup/rollup-win32-arm64-msvc.node`. Files copied directly to `dist/` as a workaround. Vercel cloud build should succeed normally.
+
 ## Recent Updates (July 16, 2026)
 1. **SEO Optimization:** Updated meta tags and Open Graph data in `index.html` and other pages with exact casing for keywords ("Showpay", "Showpay login", "Showpay app", "Showpay apk"). GoDaddy `app-atgpay.in` domain was instructed to be unlinked to prioritize `app-showpay.in`.
 2. **Admin Panel Mobile Responsiveness:**
