@@ -1,0 +1,82 @@
+﻿[build]
+  publish = "dist"
+  command = "npm run build"
+
+# ─── Redirects / Rewrites ───────────────────────────────────────────────────
+
+# Root → Login page (main fix)
+[[redirects]]
+  from = "/"
+  to   = "/user-app/pages/login.html"
+  status = 200
+
+# /home → home page
+[[redirects]]
+  from = "/home"
+  to   = "/user-app/pages/home.html"
+  status = 200
+
+# /admin → admin login
+[[redirects]]
+  from = "/admin"
+  to   = "/admin-app/pages/login.html"
+  status = 200
+
+# /login → root (permanent redirect)
+[[redirects]]
+  from = "/login"
+  to   = "/"
+  status = 301
+
+# /showpay-apk (without .html)
+[[redirects]]
+  from = "/showpay-apk"
+  to   = "/showpay-apk.html"
+  status = 200
+
+# /showpay-usdt (without .html)
+[[redirects]]
+  from = "/showpay-usdt"
+  to   = "/showpay-usdt.html"
+  status = 200
+
+# /homepages (without .html)
+[[redirects]]
+  from = "/homepages"
+  to   = "/homepages.html"
+  status = 200
+
+# Legacy .html redirects → clean URLs
+[[redirects]]
+  from = "/showpay-apk.html"
+  to   = "/showpay-apk"
+  status = 301
+
+[[redirects]]
+  from = "/showpay-usdt.html"
+  to   = "/showpay-usdt"
+  status = 301
+
+# 404 fallback
+[[redirects]]
+  from = "/*"
+  to   = "/404.html"
+  status = 404
+
+# ─── Security Headers (same as Vercel) ──────────────────────────────────────
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+    X-Content-Type-Options    = "nosniff"
+    X-Frame-Options           = "SAMEORIGIN"
+    X-XSS-Protection          = "1; mode=block"
+    Referrer-Policy           = "strict-origin-when-cross-origin"
+    Permissions-Policy        = "camera=(), microphone=(), geolocation=()"
+    Content-Security-Policy   = "default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://ujzupmmvfrhpwziudydr.supabase.co https://*.supabase.co; media-src 'self' https:; frame-ancestors 'none';"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
