@@ -33,6 +33,8 @@ function getHtmlFiles(dir, fileList = {}) {
 
 export default defineConfig(() => {
   return {
+    // Top-level plugins array required by Cloudflare Wrangler / @cloudflare/vite-plugin
+    plugins: [],
     server: {
       port: 3000,
       host: '0.0.0.0'
