@@ -1,4 +1,4 @@
-﻿# Root → Login page (main fix)
+# Root → Login page (main fix)
 /                           /user-app/pages/login.html        200
 /home                       /user-app/pages/home.html         200
 /admin                      /admin-app/pages/login.html       200
@@ -9,6 +9,14 @@
 /homepages                  /homepages.html                   200
 /about-showpay              /about-showpay.html               200
 /showpay-guide              /showpay-guide.html               200
+
+# SEO: Internal paths → clean URLs (301 permanent redirect)
+/user-app/pages/login.html  /                                 301
+/user-app/pages/login       /                                 301
+/user-app/pages/home.html   /home                             301
+/user-app/pages/home        /home                             301
+/admin-app/pages/login.html /admin                            301
+/admin-app/pages/login      /admin                            301
 
 # Legacy .html → clean URL redirects
 /login                      /                                 301
