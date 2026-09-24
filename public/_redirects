@@ -1,6 +1,6 @@
-# Root → Login page
-/                           /user-app/pages/login.html        200
+# /home → home page
 /home                       /user-app/pages/home.html         200
+# /admin → admin login
 /admin                      /admin-app/pages/login.html       200
 
 # Clean URLs (without .html)
