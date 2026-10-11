@@ -1,13 +1,18 @@
 import { supabase } from "../../user-app/js/config/supabase.js";
+import { createLoginTransition } from "./login-transition.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("adminLoginForm");
   const emailInput = document.getElementById("email");
   const passwordInput = document.getElementById("password");
   const errorMsg = document.getElementById("errorMsg");
+  const transition = createLoginTransition({form, overlay: document.getElementById('adminEntry'), button: form.querySelector('button[type="submit"]'), status: document.getElementById('adminEntryStatus')});
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    if (!transition.begin()) return;
+    let navigating = false;
+    try {
     const email = emailInput.value.trim();
     const password = passwordInput.value;
 
@@ -31,6 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
           .insert({ token: sessionToken, device_info: deviceInfo });
 
         localStorage.setItem("showpay_admin_session_token", sessionToken);
+        await transition.complete();
+        navigating = true;
         window.location.href = "/admin-app/pages/dashboard.html";
         return;
       }
@@ -46,6 +53,8 @@ document.addEventListener("DOMContentLoaded", () => {
           .from("admin_sessions")
           .insert({ token: sessionToken, device_info: deviceInfo });
       localStorage.setItem("showpay_admin_session_token", sessionToken);
+      await transition.complete();
+      navigating = true;
       window.location.href = "/admin-app/pages/dashboard.html";
     } else {
       errorMsg.textContent = "Invalid credentials";
@@ -55,6 +64,12 @@ document.addEventListener("DOMContentLoaded", () => {
       errorMsg.style.textAlign = "center";
       errorMsg.style.marginBottom = "16px";
       errorMsg.style.fontSize = "14px";
+    }
+    } catch {
+      errorMsg.textContent = "Unable to sign in. Please try again.";
+      errorMsg.classList.remove("hidden");
+    } finally {
+      if (!navigating) transition.reset();
     }
   });
 });

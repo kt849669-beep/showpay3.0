@@ -6,8 +6,18 @@
     <title>Admin Login - ShowPay</title>
     <meta name="robots" content="noindex, nofollow" />
     <link rel="stylesheet" href="../css/admin.css" />
+    <link rel="stylesheet" href="../css/login-transition.css" />
+    <link rel="preload" as="image" href="/showpay-brand.jpeg" />
   </head>
   <body>
+    <div id="adminEntry" class="admin-entry" hidden>
+      <div class="admin-entry-stage">
+        <img class="admin-entry-logo" src="/showpay-brand.jpeg" width="144" height="144" alt="ShowPay" />
+        <div class="admin-entry-shadow" aria-hidden="true"></div>
+        <p id="adminEntryStatus" class="admin-entry-status" role="status" aria-live="polite">Signing in…</p>
+        <p class="admin-entry-caption">SHOWPAY ADMIN</p>
+      </div>
+    </div>
     <div class="admin-login-wrapper">
       <div class="admin-login-box">
         <div style="text-align: center; margin-bottom: 24px;">
