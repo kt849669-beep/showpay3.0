@@ -36,3 +36,4 @@ This file serves as memory for AI agents. When a new conversation starts, read t
 - New public help guides do not implement password resets, collect credentials or advertise unverified contacts.
 - Build-generated sitemap contains canonical public pages only. The date reflects this content release rather than build filesystem timestamps.
 - Rollback target before this release: Pages deployment `559486ab-45e7-40ff-af4b-91af8980f85c`, source commit `1958bc9870149d331f5813552fad1f1ea91c4754`.
+- Public-login build optimization in `scripts/optimize-public-login.cjs` inlines existing styles, loads fonts without blocking paint and defers icon initialization until DOMContentLoaded. It enables zoom and adds accessible field names and scoped contrast fixes. Existing account JavaScript and admin documents are unchanged. New PageSpeed scores require a deployed audit; no 100-point result has been verified.

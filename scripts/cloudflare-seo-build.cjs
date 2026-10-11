@@ -65,3 +65,4 @@ const routingSource = fs.readFileSync(path.join(root, 'scripts', 'cloudflare-seo
 fs.writeFileSync(path.join(dist, '_worker.js'), `const documents = ${JSON.stringify(documents)};\nconst aliases = ${JSON.stringify(aliases)};\nconst sitemap = ${JSON.stringify(sitemap)};\n${routingSource}`);
 fs.writeFileSync(path.join(dist, '_routes.json'), JSON.stringify({version:1,include:[...Object.keys(routes),...Object.keys(aliases),'/sitemap.xml'],exclude:[]},null,2));
 console.log(`Cloudflare SEO build: ${Object.keys(routes).length} public guides; login/admin assets unchanged.`);
+require('./optimize-public-login.cjs');
