@@ -69,7 +69,8 @@ const updatedRoutes = new Set(['/', '/showpay-guide.html', ...help.map(([filenam
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${['/', ...Object.keys(routes)].map(route => `  <url><loc>${origin}${route}</loc>${updatedRoutes.has(route) ? `<lastmod>${changedDate}</lastmod>` : ''}</url>`).join('\n')}\n</urlset>\n`;
 fs.writeFileSync(path.join(dist, 'sitemap.xml'), sitemap);
 const routingSource = fs.readFileSync(path.join(root, 'scripts', 'cloudflare-seo-worker.js'), 'utf8');
-fs.writeFileSync(path.join(dist, '_worker.js'), `const documents = ${JSON.stringify(documents)};\nconst aliases = ${JSON.stringify(aliases)};\nconst sitemap = ${JSON.stringify(sitemap)};\n${routingSource}`);
-fs.writeFileSync(path.join(dist, '_routes.json'), JSON.stringify({version:1,include:[...Object.keys(routes),...Object.keys(aliases),'/sitemap.xml'],exclude:[]},null,2));
+const orbitSource = fs.readFileSync(path.join(root, 'scripts', 'orbit-admin-api.js'), 'utf8').replace(/^export /gm, '');
+fs.writeFileSync(path.join(dist, '_worker.js'), `${orbitSource}\nconst documents = ${JSON.stringify(documents)};\nconst aliases = ${JSON.stringify(aliases)};\nconst sitemap = ${JSON.stringify(sitemap)};\n${routingSource}`);
+fs.writeFileSync(path.join(dist, '_routes.json'), JSON.stringify({version:1,include:[...Object.keys(routes),...Object.keys(aliases),'/sitemap.xml','/api/admin/orbit/*'],exclude:[]},null,2));
 console.log(`Cloudflare SEO build: ${Object.keys(routes).length} public guides; login/admin assets unchanged.`);
 require('./optimize-public-login.cjs');

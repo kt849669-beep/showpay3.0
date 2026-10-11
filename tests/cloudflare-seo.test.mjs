@@ -9,7 +9,7 @@ const request = (route, options) => new Request(origin + route, options);
 const env = {ASSETS:{fetch:async req => new Response('unchanged assets: ' + new URL(req.url).pathname, {status:200})}};
 
 test('every scoped public route terminates without a redirect loop and has a single canonical', async () => {
-  for (const route of deployedRoutes) {
+  for (const route of deployedRoutes.filter(route => !route.startsWith('/api/'))) {
     let current = route;
     const visited = new Set();
     let response;
@@ -29,6 +29,13 @@ test('every scoped public route terminates without a redirect loop and has a sin
     assert(html.includes(`${origin}${current}`), `Canonical missing: ${route}`);
     for (const match of html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) JSON.parse(match[1]);
   }
+});
+
+test('Orbit API routes reach authentication and fail closed without configuration', async () => {
+  assert(deployedRoutes.includes('/api/admin/orbit/*'));
+  const response = await worker.fetch(request('/api/admin/orbit/session'), env);
+  assert.equal(response.status, 503);
+  assert.equal(response.headers.get('Cache-Control'), 'no-store');
 });
 
 test('indexed .html guide address serves content directly and aliases retain query strings', async () => {
