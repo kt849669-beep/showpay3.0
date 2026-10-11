@@ -5,6 +5,7 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const dist = path.join(root, 'dist');
 const origin = 'https://app-showpay.in';
+const publicResources = require('./showpay-public-resources.cjs');
 const changedDate = '2026-10-11';
 const routes = {
   '/about-showpay.html': 'about-showpay.html',
@@ -42,6 +43,12 @@ for (const [filename, title, heading, description, body] of help) {
 const guideExtra = `\n<section class="content-section" aria-labelledby="showpay-guide-quick-answers"><h2 id="showpay-guide-quick-answers">ShowPay login, app download and USDT help</h2><p>ShowPay, also written Show Pay, is the name used for the web app and account guides on app-showpay.in. Start with the task you want to complete.</p><h3>Where is the ShowPay login?</h3><p><a href="/">Open the ShowPay login</a> to access your registered account. For assistance, read <a href="/showpay-password-help.html">password and login help</a>.</p><h3>Where can I download the ShowPay app or APK?</h3><p>The web app works in a current browser. This website does not host a direct APK download. Read the <a href="/showpay-apk">app and APK guide</a> before considering an installation.</p><h3>Where can I find ShowPay USDT to INR information?</h3><p>Read the <a href="/showpay-usdt">USDT guide</a> for network and transaction checks. Conversion quotes and fees can change; confirm current terms in your account.</p>${navigation}</section>\n`;
 const guideFile = path.join(dist, 'showpay-guide.html');
 fs.writeFileSync(guideFile, fs.readFileSync(guideFile, 'utf8').replace('    </main>', `${guideExtra}    </main>`));
+for (const filename of ['showpay-guide.html', 'how-to-deposit-showpay.html']) {
+  const documentPath = path.join(dist, filename);
+  fs.writeFileSync(documentPath, fs.readFileSync(documentPath, 'utf8').replace('</main>', `${publicResources}</main>`));
+}
+const passwordHelpPath = path.join(dist, 'showpay-password-help.html');
+fs.writeFileSync(passwordHelpPath, fs.readFileSync(passwordHelpPath, 'utf8').replace('<h2>Does this page reset a password?</h2>', '<p><a href="https://app-web.showpayweb.com/forgetPassword">Open the ShowPay Forgot Password page</a></p><h2>Does this page reset a password?</h2>'));
 
 // Keep the indexed .html addresses for guides. Serve clean aliases with one 301.
 const aliases = {'/showpay/homepages':'/homepages','/showpay/homepages/':'/homepages','/showpay/homepages/index.html':'/homepages'};
