@@ -2,6 +2,7 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     const pathname = url.pathname;
+    if (pathname.startsWith('/api/admin/orbit/')) return handleOrbitAdmin(request, env);
     // Non-SEO routes, including login, home and admin, use the original assets.
     if (!(pathname in documents) && !(pathname in aliases) && pathname !== '/sitemap.xml') {
       return env.ASSETS.fetch(request);
