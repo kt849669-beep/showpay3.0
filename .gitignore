@@ -9,3 +9,4 @@ seo-monitor/output/
 !.env.example
 
 .env*
+.wrangler/

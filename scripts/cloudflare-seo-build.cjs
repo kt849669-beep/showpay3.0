@@ -58,7 +58,8 @@ const documents = {};
 for (const [route, filename] of Object.entries(routes)) {
   documents[route] = fs.readFileSync(path.join(dist, filename), 'utf8');
 }
-const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${['/', ...Object.keys(routes)].map(route => `  <url><loc>${origin}${route}</loc><lastmod>${changedDate}</lastmod></url>`).join('\n')}\n</urlset>\n`;
+const updatedRoutes = new Set(['/', '/showpay-guide.html', ...help.map(([filename]) => `/${filename}`)]);
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${['/', ...Object.keys(routes)].map(route => `  <url><loc>${origin}${route}</loc>${updatedRoutes.has(route) ? `<lastmod>${changedDate}</lastmod>` : ''}</url>`).join('\n')}\n</urlset>\n`;
 fs.writeFileSync(path.join(dist, 'sitemap.xml'), sitemap);
 const routingSource = fs.readFileSync(path.join(root, 'scripts', 'cloudflare-seo-worker.js'), 'utf8');
 fs.writeFileSync(path.join(dist, '_worker.js'), `const documents = ${JSON.stringify(documents)};\nconst aliases = ${JSON.stringify(aliases)};\nconst sitemap = ${JSON.stringify(sitemap)};\n${routingSource}`);
