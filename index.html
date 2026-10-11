@@ -41,6 +41,9 @@
     <link rel="preload" href="/user-app/css/login.css" as="style" />
     <link rel="stylesheet" href="/user-app/css/common.css" />
     <link rel="stylesheet" href="/user-app/css/login.css" />
+    <link rel="stylesheet" href="/showpay-seo.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@0.511.0/dist/umd/lucide.min.js"></script>
@@ -148,8 +151,12 @@
     </script>
   </head>
   <body>
+    <main class="showpay-public-main">
     <div class="login-container">
+      <div class="login-heading-brand">
+      <img src="/showpay-brand.jpeg" alt="ShowPay" width="36" height="36" />
       <h1 class="header">Login</h1>
+      </div>
 
       <form id="loginForm">
         <div class="form-group">
@@ -251,7 +258,21 @@
         recovery code. Account features, limits and transaction instructions can
         change, so confirm the current information after signing in.
       </aside>
+      <section class="seo-faq" aria-labelledby="showpay-help-questions">
+        <h2 id="showpay-help-questions">ShowPay login and account help</h2>
+        <details><summary>How do I recover my ShowPay password?</summary><p>The Forget Password link opens public troubleshooting guidance. This website does not collect recovery codes or reset your password through this guide. Use a recovery method provided by your account service.</p><a href="/showpay-password-help.html">Read password and login help</a></details>
+        <details><summary>How do I reach ShowPay customer support?</summary><p>Read the support guide and use the verified contact option provided by your account service. Never share your password, OTP or MPIN in a support message.</p><a href="/showpay-support.html">Read the ShowPay support guide</a></details>
+      </section>
+      <nav class="seo-links" aria-label="ShowPay guides">
+        <a href="/showpay-guide.html">ShowPay guides</a>
+        <a href="/about-showpay.html">About ShowPay</a>
+        <a href="/showpay-apk">ShowPay app and APK information</a>
+        <a href="/showpay-usdt">ShowPay USDT to INR information</a>
+        <a href="/how-to-use-showpay.html">How to use ShowPay</a>
+        <a href="/showpay-support.html">Support</a>
+      </nav>
     </section>
+    </main>
 
     <!-- Limit Popup -->
     <div

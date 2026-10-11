@@ -8,6 +8,7 @@
     "prebuild": "npm run generate:seo",
     "dev": "vite --port=3000 --host=0.0.0.0",
     "build": "vite build",
+    "postbuild": "node scripts/cloudflare-seo-build.cjs",
     "preview": "vite preview",
     "pretest:seo": "npm run generate:seo",
     "test:seo": "node tests/seo-audit.mjs",

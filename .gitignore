@@ -8,5 +8,4 @@ seo-monitor/output/
 .env*
 !.env.example
 
-.vercel
 .env*

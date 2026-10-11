@@ -16,7 +16,6 @@ function getHtmlFiles(dir, fileList = {}) {
         file !== 'node_modules' &&
         file !== 'dist' &&
         file !== '.git' &&
-        file !== '.vercel' &&
         file !== 'public'
       ) {
         getHtmlFiles(fullPath, fileList);
