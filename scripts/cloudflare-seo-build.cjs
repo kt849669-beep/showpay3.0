@@ -7,7 +7,9 @@ const dist = path.join(root, 'dist');
 const origin = 'https://app-showpay.in';
 const publicResources = require('./showpay-public-resources.cjs');
 const changedDate = '2026-10-11';
+const guide = require('./build-showpay-guide.cjs');
 const routes = {
+  ...guide.routes,
   '/about-showpay.html': 'about-showpay.html',
   '/showpay-apk': 'showpay-apk.html',
   '/showpay-usdt': 'showpay-usdt.html',
@@ -65,8 +67,7 @@ const documents = {};
 for (const [route, filename] of Object.entries(routes)) {
   documents[route] = fs.readFileSync(path.join(dist, filename), 'utf8');
 }
-const updatedRoutes = new Set(['/', '/showpay-guide.html', ...help.map(([filename]) => `/${filename}`)]);
-const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${['/', ...Object.keys(routes)].map(route => `  <url><loc>${origin}${route}</loc>${updatedRoutes.has(route) ? `<lastmod>${changedDate}</lastmod>` : ''}</url>`).join('\n')}\n</urlset>\n`;
+const sitemap = guide.sitemap();
 fs.writeFileSync(path.join(dist, 'sitemap.xml'), sitemap);
 const routingSource = fs.readFileSync(path.join(root, 'scripts', 'cloudflare-seo-worker.js'), 'utf8');
 const orbitSource = fs.readFileSync(path.join(root, 'scripts', 'orbit-admin-api.js'), 'utf8').replace(/^export /gm, '');

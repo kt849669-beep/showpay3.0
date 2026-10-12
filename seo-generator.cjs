@@ -348,3 +348,6 @@ writeIfChanged(path.join(publicDir, 'robots.txt'), robots);
 require('./generate-sitemap.cjs');
 
 console.log('SEO pages, robots.txt and sitemap.xml generated successfully.');
+
+// Add the public Homes guide while keeping existing SEO pages intact.
+require('./scripts/build-showpay-guide.cjs').generate();

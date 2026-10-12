@@ -26,7 +26,8 @@ test('every scoped public route terminates without a redirect loop and has a sin
     if (route === '/sitemap.xml') continue;
     assert.equal((html.match(/<h1\b/gi) || []).length, 1, route);
     assert.equal((html.match(/rel=["']canonical["']/gi) || []).length, 1, route);
-    assert(html.includes(`${origin}${current}`), `Canonical missing: ${route}`);
+    assert(html.includes(`rel="canonical" href="${origin}${current}"`), `Canonical missing: ${route}`);
+    assert.equal(response.headers.get('Link'), `<${origin}${current}>; rel="canonical"`);
     for (const match of html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) JSON.parse(match[1]);
   }
 });
@@ -50,13 +51,31 @@ test('indexed .html guide address serves content directly and aliases retain que
 test('sitemap lists only final public addresses that return indexable HTML', async () => {
   const xml = await (await worker.fetch(request('/sitemap.xml'), env)).text();
   const urls = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
-  assert.equal(new Set(urls).size, 11);
+  assert.equal(new Set(urls).size, 14);
+  assert(urls.includes(origin+'/homes'));
+  assert.equal((xml.match(/<image:image>/g)||[]).length, 3);
   assert(!xml.includes('/admin') && !xml.includes('/home<'));
   for (const url of urls.filter(url => url !== origin + '/')) {
     const response = await worker.fetch(new Request(url), env);
     assert.equal(response.status, 200, url);
     assert.equal(response.headers.get('X-Robots-Tag'), 'index, follow');
   }
+});
+
+test('Homes is public, links to the existing login and registration, and keeps its own canonical', async () => {
+  const response = await worker.fetch(request('/homes'), env);
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert(html.includes('href="https://app-showpay.in/"'));
+  assert(html.includes('href="https://app-web.showpayweb.com/regist?code=1eashowpb2dp"'));
+  assert(html.includes('id="usdt-amount"'));
+  assert(!/<form\b|id="(?:mobile|password|loginForm)"/i.test(html));
+  for (const match of html.matchAll(/(?:href|src)="(\/[^"#]*)"/g)) {
+    if (match[1] === '/') continue;
+    assert(deployedRoutes.includes(match[1]) || fs.existsSync(new URL('../dist'+match[1], import.meta.url)), `Missing destination ${match[1]}`);
+  }
+  const preview = await worker.fetch(new Request('https://draft.pages.dev/homes'),env);
+  assert.equal(preview.headers.get('X-Robots-Tag'), 'noindex, nofollow');
 });
 
 test('preview guides are noindex and HEAD returns headers without a body', async () => {

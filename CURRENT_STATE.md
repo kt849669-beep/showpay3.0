@@ -1,5 +1,13 @@
 # ShowPay 3.0 - Current Project State & Memory
 
+## Draft Homes guide (October 12, 2026)
+- Prepared on `codex/homes-seo-guide` only. The owner explicitly requested GitHub push without updating the domain. Do not merge into `main` or deploy without a later request; `main` automatically deploys to Cloudflare Pages.
+- `/homes` adds the supplied public guide, with a scoped copy below the existing login after a half-viewport white gap. Login forms, account JavaScript, admin code and the private `/home` route remain unchanged.
+- Existing SEO pages retain their original content, self-canonical addresses, aliases and sitemap entries. New Homes, privacy and terms pages are additive.
+- New guide links use root login and registration code `1eashowpb2dp`; its calculator uses an explicitly illustrative screenshot rate. Social links do not claim verified official account ownership.
+- Source templates and assets are under `seo/` and `public/showpay-guide-assets/v20261012/`; `scripts/build-showpay-guide.cjs` generates the new documents. `npm run test:seo` builds before auditing the actual output.
+- Build, public-login tests, Cloudflare routing tests and the SEO audit passed. Mobile login layout retained its original positions; the added gap is 50svh. The existing dashboard session check was preserved; a browser redirect could not be confirmed in the local preview.
+
 This file serves as memory for AI agents. When a new conversation starts, read this to understand the current state.
 
 ## Recent Updates (September 17, 2026)

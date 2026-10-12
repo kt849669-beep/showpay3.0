@@ -1,0 +1,70 @@
+<a class="skip-link" href="#guide-main">Skip to content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/homes" aria-label="Show Pay home">
+          <img class="brand-logo" src="/showpay-guide-assets/v20261012/images/showpay-logo-96.webp" width="96" height="96" alt="">
+          <span>Show <b>Pay</b>
+          </span>
+        </a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" hidden>Menu <span aria-hidden="true">☰</span>
+        </button>
+        <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+          <a href="./#features">The app</a>
+          <a href="./#how-it-works">How it works</a>
+          <a href="./#calculator">USDT calculator</a>
+          <a href="./#faq">FAQs</a>
+        </nav>
+        <a class="button button-dark header-cta login-link" href="https://app-showpay.in/" rel="noopener noreferrer">Open Show Pay <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </header>
+    <main class="container legal-page" id="guide-main">
+      <p class="eyebrow">Show Pay GUIDE</p>
+      <h1>Privacy notice</h1>
+      <p class="updated">Last updated: 12 October 2026</p>
+      <p>This notice describes /homes and the public guide sections at app-showpay.in. Account login and the linked registration service have separate account functions.</p>
+      <h2>Information on this website</h2>
+      <p>The public guide and calculator do not collect account credentials or payments. The separate login form at app-showpay.in handles the phone number and password you enter to access your account. Do not enter account details into the calculator or share them through social links.</p>
+      <h2>The calculator and invite code</h2>
+      <p>Calculator amounts are processed inside your browser. The website code does not send those amounts to a server or save them in cookies or local storage. Copying the invite code, when available, writes only that code to your device clipboard after you press Copy code.</p>
+      <h2>Cookies and analytics</h2>
+      <p>The public guide does not include analytics scripts, advertising pixels, cookies or local-storage tracking. This statement does not describe the separate account login or dashboard. The hosting provider may process normal request data, such as an IP address, browser information, requested page and request time, to deliver the website and maintain security.</p>
+      <h2>External app and Telegram links</h2>
+      <p>Register and Download app buttons take you to app-web.showpayweb.com with a referral code. Open Show Pay and login buttons open https://app-showpay.in/. Any information you enter on that destination is handled by its operator. Review the destination’s policies before submitting information. Password-reset links open https://app-web.showpayweb.com/forgetPassword. Telegram links open the supplied showpayyoffical channel on t.me, which has its own privacy practices.</p>
+      <h2>Updates and account questions</h2>
+      <p>If this website later adds forms, analytics or other data collection, this notice should be updated to describe that change. For information held by your Show Pay account, use the platform’s own support and privacy options.</p>
+      <a class="button button-dark" href="/homes">Back to Show Pay guide <span aria-hidden="true">↗</span>
+      </a>
+    </main>
+    <footer class="site-footer" id="about">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="/homes">
+            <img class="brand-logo" src="/showpay-guide-assets/v20261012/images/showpay-logo-96.webp" width="96" height="96" alt="">
+            <span>Show <b>Pay</b>
+            </span>
+          </a>
+          <p>An independent Show Pay app guide with registration links, task examples, screenshots and a USDT calculator.</p>
+          <span class="footer-domain">app-showpay.in</span>
+        </div>
+        <div>
+          <h2>Explore</h2>
+          <a href="./#features">App features</a>
+          <a href="./#preview">App screenshots</a>
+          <a href="./#calculator">USDT calculator</a>
+          <a href="./#how-it-works">Getting started</a>
+        </div>
+        <div>
+          <h2>Useful details</h2>
+          <a href="./#rewards">Task income</a>
+          <a href="./#faq">Common questions</a>
+          <a href="/privacy-policy.html">Privacy notice</a>
+          <a href="/terms.html">Website terms</a>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <p>© <span data-year>2026</span> app-showpay.in</p>
+        <p>Independent referral guide. Screenshot rates and task terms may change.</p>
+        <a href="./#main">Back to top ↑</a>
+      </div>
+    </footer>

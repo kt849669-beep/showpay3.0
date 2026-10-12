@@ -10,7 +10,7 @@
     "build": "vite build",
     "postbuild": "node scripts/cloudflare-seo-build.cjs",
     "preview": "vite preview",
-    "pretest:seo": "npm run generate:seo",
+    "pretest:seo": "npm run build",
     "test:seo": "node tests/seo-audit.mjs",
     "test:seo-monitor": "node --test --test-isolation=none seo-monitor/tests/monitor.test.mjs",
     "monitor:seo": "node seo-monitor/run.mjs"
