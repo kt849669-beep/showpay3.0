@@ -27,7 +27,7 @@ test('built login pages allow zoom, label inputs and avoid CSS/icon render block
     assert(html.includes('media="print" onload="this.media=\'all\'"'));
     for (const id of ['loginForm', 'loginBtn', 'errorMessage', 'limitPopup']) assert(html.includes(`id="${id}"`));
     assert.match(html, /type="module"[^>]+src="\/assets\/login-[^"]+\.js"/);
-    assert(html.includes('href="https://app-web.showpay-web.com/regist?code=2invite5p6"'));
+    assert(html.includes('href="https://app-web.showpayweb.com/regist?code=1eashowpb2dp"'));
   }
 });
 test('admin login retains its original stylesheet and icon loading', () => {
