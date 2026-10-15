@@ -15,9 +15,17 @@
   flex: 0 0 44px;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   margin: 0;
   padding: 0;
   border-bottom: 1px solid #f0f0f0;
+}
+
+.showpay-public-main .login-container .login-brand-logo {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  object-fit: contain;
 }
 
 .showpay-public-main .login-container .header {

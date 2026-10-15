@@ -9,6 +9,7 @@ const publicDir = path.join(root, 'public');
 const origin = 'https://app-showpay.in';
 const assetRoot = '/showpay-guide-assets/v20261012';
 const changedDate = '2026-10-12';
+const loginChangedDate = '2026-10-15';
 const title = 'ShowPay App Guide | Login, App Download & USDT to INR';
 const description = 'Explore ShowPay login, registration, app and APK download information, app screenshots and a USDT to INR calculator. Read the Show Pay guide at app-showpay.in.';
 const keywords = 'ShowPay, Showpay, showpay, SHOWPAY, Show Pay, show pay, ShowPay login, showpay usdt to inr, ShowPay app download, ShowPay APK download, ShowPay official website, ShowPay registration, ShowPay INR tasks, ShowPay USDT calculator';
@@ -89,7 +90,7 @@ function schema(canonical, pageTitle, pageDescription) {
   const images = ['home','tasks','account'].map((name) => ({'@type':'ImageObject','@id':`${origin}/homes#image-${name}`,contentUrl:`${origin}${assetRoot}/images/showpay-${name}.webp`,caption:`ShowPay ${name} app screenshot`,width:738,height:1599}));
   const graph = [
     {'@type':'WebSite','@id':`${origin}/#website`,url:origin+'/',name:'ShowPay',alternateName:['Showpay','Show Pay','showpay'],inLanguage:'en-IN',image:`${origin}${assetRoot}/android-chrome-512x512.png`},
-    {'@type':'WebPage','@id':`${origin}${canonical}#webpage`,url:origin+canonical,name:pageTitle,description:pageDescription,inLanguage:'en-IN',dateModified:changedDate,isPartOf:{'@id':`${origin}/#website`},primaryImageOfPage:{'@id':`${origin}/homes#image-home`}},
+    {'@type':'WebPage','@id':`${origin}${canonical}#webpage`,url:origin+canonical,name:pageTitle,description:pageDescription,inLanguage:'en-IN',dateModified:canonical === '/' ? loginChangedDate : changedDate,isPartOf:{'@id':`${origin}/#website`},primaryImageOfPage:{'@id':`${origin}/homes#image-home`}},
     ...images,
   ];
   if (canonical === '/homes' || canonical === '/') {
@@ -119,7 +120,7 @@ function sitemap() {
   const pages = ['/', ...Object.keys(existingRoutes), ...Object.keys(routes)];
   const previouslyUpdated = new Set(['/showpay-guide.html','/showpay-password-help.html','/showpay-support.html','/how-to-use-showpay.html','/how-to-deposit-showpay.html','/how-to-deposit-usdt-showpay.html']);
   const images = ['home','tasks','account'];
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${pages.map(route=>`  <url><loc>${origin}${route}</loc>${route==='/' || route in routes ? `<lastmod>${changedDate}</lastmod>` : previouslyUpdated.has(route) ? '<lastmod>2026-10-11</lastmod>' : ''}${route==='/homes'?images.map(name=>`<image:image><image:loc>${origin}${assetRoot}/images/showpay-${name}.webp</image:loc></image:image>`).join(''):''}</url>`).join('\n')}\n</urlset>\n`;
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${pages.map(route=>`  <url><loc>${origin}${route}</loc>${route==='/' ? `<lastmod>${loginChangedDate}</lastmod>` : route in routes ? `<lastmod>${changedDate}</lastmod>` : previouslyUpdated.has(route) ? '<lastmod>2026-10-11</lastmod>' : ''}${route==='/homes'?images.map(name=>`<image:image><image:loc>${origin}${assetRoot}/images/showpay-${name}.webp</image:loc></image:image>`).join(''):''}</url>`).join('\n')}\n</urlset>\n`;
 }
 
 function generate() {
