@@ -151,6 +151,7 @@ function generate() {
     const loginTitle='ShowPay Login | ShowPay App & Secure Account Access';
     const loginDescription='Use ShowPay login at app-showpay.in, then explore the Show Pay app guide, registration, app and APK download information, screenshots and USDT to INR calculator.';
     html=html.replace('</head>',`<!-- SHOWPAY SEO HEAD START -->\n${metadata('/',loginTitle,loginDescription)}<link rel="stylesheet" href="${files.css}"><script defer src="${files.js}"></script>\n<!-- SHOWPAY SEO HEAD END -->\n</head>`);
+    if (!html.includes('class="homes-link"')) html=html.replace(/(<a href="https:\/\/app-web.showpayweb.com\/regist\?code=1eashowpb2dp">Register<\/a>)/, '$1 <span aria-hidden="true"> · </span><a class="homes-link" href="/homes">Homes</a>');
     write(path.join(root,filename),html.replace(/[ \t]+$/gm,'').replace(/\n{3,}/g,'\n\n'));
   }
   write(path.join(publicDir,'sitemap.xml'),sitemap());
