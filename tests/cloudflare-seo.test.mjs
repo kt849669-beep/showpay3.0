@@ -51,7 +51,11 @@ test('indexed .html guide address serves content directly and aliases retain que
 test('sitemap lists only final public addresses that return indexable HTML', async () => {
   const xml = await (await worker.fetch(request('/sitemap.xml'), env)).text();
   const urls = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
-  assert.equal(new Set(urls).size, 14);
+  assert.equal(new Set(urls).size, 13);
+  assert(!xml.includes('/homepages'));
+  const blocks = [...xml.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((match) => match[1]);
+  assert.equal(blocks.length, urls.length);
+  for (const block of blocks) assert.match(block, /<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/);
   assert(urls.includes(origin+'/homes'));
   assert.equal((xml.match(/<image:image>/g)||[]).length, 3);
   assert(!xml.includes('/admin') && !xml.includes('/home<'));
@@ -84,6 +88,15 @@ test('preview guides are noindex and HEAD returns headers without a body', async
   const head = await worker.fetch(request('/showpay-guide.html', {method:'HEAD'}), env);
   assert.equal(head.status, 200);
   assert.equal(await head.text(), '');
+});
+
+test('/homepages and its old aliases redirect once to /homes', async () => {
+  for (const route of ['/homepages', '/homepages/', '/homepages.html', '/showpay/homepages', '/showpay/homepages/', '/showpay/homepages/index.html']) {
+    const response = await worker.fetch(request(route), env);
+    assert.equal(response.status, 301, route);
+    assert.equal(response.headers.get('Location'), '/homes');
+    assert.equal(response.headers.get('X-Robots-Tag'), 'index, follow');
+  }
 });
 
 test('login, dashboard, admin and static files preserve the original asset path', async () => {

@@ -1,6 +1,8 @@
 User-agent: *
 Disallow: /admin
 Disallow: /admin-app/
+# Signed-in account shell only. The $ is required so this does not block /homes.
+Disallow: /home$
 Allow: /
 
 Sitemap: https://app-showpay.in/sitemap.xml

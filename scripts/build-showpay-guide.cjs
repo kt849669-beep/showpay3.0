@@ -9,9 +9,9 @@ const publicDir = path.join(root, 'public');
 const origin = 'https://app-showpay.in';
 const assetRoot = '/showpay-guide-assets/v20261012';
 const changedDate = '2026-10-12';
-const loginChangedDate = '2026-10-15';
-const title = 'ShowPay App Guide | Login, App Download & USDT to INR';
-const description = 'Explore ShowPay login, registration, app and APK download information, app screenshots and a USDT to INR calculator. Read the Show Pay guide at app-showpay.in.';
+const loginChangedDate = '2026-10-23';
+const title = 'ShowPay App Guide – Registration, Tasks & Features';
+const description = 'Complete Show Pay app guide: ShowPay registration, how tasks and the wallet work, app screenshots and a USDT to INR calculator.';
 const keywords = 'ShowPay, Showpay, showpay, SHOWPAY, Show Pay, show pay, ShowPay login, showpay usdt to inr, ShowPay app download, ShowPay APK download, ShowPay official website, ShowPay registration, ShowPay INR tasks, ShowPay USDT calculator';
 const routes = {
   '/homes': 'homes.html',
@@ -24,7 +24,6 @@ const existingRoutes = {
   '/showpay-apk': 'showpay-apk.html',
   '/showpay-usdt': 'showpay-usdt.html',
   '/showpay-guide.html': 'showpay-guide.html',
-  '/homepages': 'homepages.html',
   '/showpay-password-help.html': 'showpay-password-help.html',
   '/showpay-support.html': 'showpay-support.html',
   '/how-to-use-showpay.html': 'how-to-use-showpay.html',
@@ -90,7 +89,7 @@ function schema(canonical, pageTitle, pageDescription) {
   const images = ['home','tasks','account'].map((name) => ({'@type':'ImageObject','@id':`${origin}/homes#image-${name}`,contentUrl:`${origin}${assetRoot}/images/showpay-${name}.webp`,caption:`ShowPay ${name} app screenshot`,width:738,height:1599}));
   const graph = [
     {'@type':'WebSite','@id':`${origin}/#website`,url:origin+'/',name:'ShowPay',alternateName:['Showpay','Show Pay','showpay'],inLanguage:'en-IN',image:`${origin}${assetRoot}/android-chrome-512x512.png`},
-    {'@type':'WebPage','@id':`${origin}${canonical}#webpage`,url:origin+canonical,name:pageTitle,description:pageDescription,inLanguage:'en-IN',dateModified:canonical === '/' ? loginChangedDate : changedDate,isPartOf:{'@id':`${origin}/#website`},primaryImageOfPage:{'@id':`${origin}/homes#image-home`}},
+    {'@type':'WebPage','@id':`${origin}${canonical}#webpage`,url:origin+canonical,name:pageTitle,description:pageDescription,inLanguage:'en-IN',dateModified:canonical === '/' || canonical === '/homes' ? loginChangedDate : changedDate,isPartOf:{'@id':`${origin}/#website`},primaryImageOfPage:{'@id':`${origin}/homes#image-home`}},
     ...images,
   ];
   if (canonical === '/homes' || canonical === '/') {
@@ -118,9 +117,10 @@ ${schema(canonical,pageTitle,pageDescription)}`;
 
 function sitemap() {
   const pages = ['/', ...Object.keys(existingRoutes), ...Object.keys(routes)];
-  const previouslyUpdated = new Set(['/showpay-guide.html','/showpay-password-help.html','/showpay-support.html','/how-to-use-showpay.html','/how-to-deposit-showpay.html','/how-to-deposit-usdt-showpay.html']);
+  const unchanged = new Set(['/privacy-policy.html', '/terms.html']);
   const images = ['home','tasks','account'];
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${pages.map(route=>`  <url><loc>${origin}${route}</loc>${route==='/' ? `<lastmod>${loginChangedDate}</lastmod>` : route in routes ? `<lastmod>${changedDate}</lastmod>` : previouslyUpdated.has(route) ? '<lastmod>2026-10-11</lastmod>' : ''}${route==='/homes'?images.map(name=>`<image:image><image:loc>${origin}${assetRoot}/images/showpay-${name}.webp</image:loc></image:image>`).join(''):''}</url>`).join('\n')}\n</urlset>\n`;
+  const lastmod = route => unchanged.has(route) ? changedDate : loginChangedDate;
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${pages.map(route=>`  <url><loc>${origin}${route}</loc><lastmod>${lastmod(route)}</lastmod>${route==='/homes'?images.map(name=>`<image:image><image:loc>${origin}${assetRoot}/images/showpay-${name}.webp</image:loc></image:image>`).join(''):''}</url>`).join('\n')}\n</urlset>\n`;
 }
 
 function generate() {
@@ -149,8 +149,8 @@ function generate() {
       .replace(/<link\b[^>]*rel="(?:canonical|icon|apple-touch-icon|sitemap)"[^>]*>/g,'')
       .replace(/<script\b[^>]*type="application\/ld\+json"[^>]*>[\s\S]*?<\/script>/g,'')
       .replace(/<!-- SHOWPAY SEO HEAD START -->[\s\S]*?<!-- SHOWPAY SEO HEAD END -->/g,'');
-    const loginTitle='ShowPay Login | ShowPay App & Secure Account Access';
-    const loginDescription='Use ShowPay login at app-showpay.in, then explore the Show Pay app guide, registration, app and APK download information, screenshots and USDT to INR calculator.';
+    const loginTitle='ShowPay Login – Show Pay App Sign In';
+    const loginDescription='ShowPay login made easy: sign in to the Show Pay app, then read guides for registration, the ShowPay app, APK and the USDT to INR rate.';
     html=html.replace('</head>',`<!-- SHOWPAY SEO HEAD START -->\n${metadata('/',loginTitle,loginDescription)}<link rel="stylesheet" href="${files.css}"><script defer src="${files.js}"></script>\n<!-- SHOWPAY SEO HEAD END -->\n</head>`);
     write(path.join(root,filename),html.replace(/[ \t]+$/gm,'').replace(/\n{3,}/g,'\n\n'));
   }

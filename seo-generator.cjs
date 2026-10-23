@@ -21,15 +21,15 @@ function writeIfChanged(filePath, content) {
 const pages = [
   {
     filename: 'about-showpay.html',
-    title: 'About ShowPay | App, Login and Payment Platform',
-    description: 'Learn about ShowPay, its secure account login, mobile-friendly web app and available payment and wallet features.',
+    title: 'About ShowPay – What Is the Show Pay App?',
+    description: 'What is ShowPay? An overview of the Show Pay app, its login, wallet, UPI and USDT features, and how to use it safely.',
     schema: {
       '@context': 'https://schema.org',
       '@type': 'AboutPage',
       '@id': `${domain}/about-showpay.html#webpage`,
       url: `${domain}/about-showpay.html`,
-      name: 'About ShowPay',
-      description: 'Information about ShowPay account access, the web app and available payment features.',
+      name: 'About ShowPay – What Is the Show Pay App?',
+      description: 'What is ShowPay? An overview of the Show Pay app, its login, wallet, UPI and USDT features, and how to use it safely.',
       isPartOf: { '@type': 'WebSite', '@id': `${domain}/#website`, url: `${domain}/`, name: 'Showpay' }
     },
     body: `
@@ -59,15 +59,15 @@ const pages = [
   {
     filename: 'showpay-apk.html',
     route: '/showpay-apk',
-    title: 'ShowPay APK and App Access | ShowPay Login',
-    description: 'Find safe Showpay app access information, sign in through the web login and avoid unverified Showpay apk download sources.',
+    title: 'ShowPay APK Download – Show Pay App for Android',
+    description: 'ShowPay APK and app access explained: how to open the Show Pay app on Android, safe download tips and the ShowPay login link.',
     schema: {
       '@context': 'https://schema.org',
       '@type': 'WebPage',
       '@id': `${domain}/showpay-apk#webpage`,
       url: `${domain}/showpay-apk`,
-      name: 'ShowPay APK and App Access',
-      description: 'Safe access information for the Showpay app, web login and APK-related searches.',
+      name: 'ShowPay APK Download – Show Pay App for Android',
+      description: 'ShowPay APK and app access explained: how to open the Show Pay app on Android, safe download tips and the ShowPay login link.',
       isPartOf: { '@type': 'WebSite', '@id': `${domain}/#website`, url: `${domain}/`, name: 'ShowPay' }
     },
     body: `
@@ -95,15 +95,15 @@ const pages = [
   {
     filename: 'showpay-usdt.html',
     route: '/showpay-usdt',
-    title: 'ShowPay USDT Guide | Crypto Deposit and Network Safety',
-    description: 'Learn how to verify USDT networks, check wallet addresses and track transaction status for Showpay cryptocurrency features.',
+    title: 'ShowPay USDT Rate – USDT to INR on Show Pay',
+    description: 'ShowPay USDT guide: how USDT to INR works on Show Pay, network (TRC20) and address checks, deposit and withdrawal tips.',
     schema: {
       '@context': 'https://schema.org',
       '@type': 'WebPage',
       '@id': `${domain}/showpay-usdt#webpage`,
       url: `${domain}/showpay-usdt`,
-      name: 'ShowPay USDT Guide',
-      description: 'Important network and address verification steps for ShowPay USDT and cryptocurrency transactions.',
+      name: 'ShowPay USDT Rate – USDT to INR on Show Pay',
+      description: 'ShowPay USDT guide: how USDT to INR works on Show Pay, network (TRC20) and address checks, deposit and withdrawal tips.',
       isPartOf: { '@type': 'WebSite', '@id': `${domain}/#website`, url: `${domain}/`, name: 'ShowPay' }
     },
     body: `
@@ -135,15 +135,15 @@ const pages = [
   },
   {
     filename: 'showpay-guide.html',
-    title: 'ShowPay Guides | Complete Help and Support Center',
-    description: 'Find official ShowPay guides for account login, mobile app access, deposits, USDT transactions and password recovery.',
+    title: 'ShowPay Help Center – All Show Pay Guides',
+    description: 'All ShowPay guides in one place: login, app use, deposit, USDT deposit, password help and support for Show Pay users.',
     schema: {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
       '@id': `${domain}/showpay-guide.html#webpage`,
       url: `${domain}/showpay-guide.html`,
-      name: 'ShowPay Guides',
-      description: 'A collection of ShowPay account, app, deposit, USDT and password-help guides.',
+      name: 'ShowPay Help Center – All Show Pay Guides',
+      description: 'All ShowPay guides in one place: login, app use, deposit, USDT deposit, password help and support for Show Pay users.',
       about: { '@type': 'Organization', '@id': `${domain}/#organization`, name: 'ShowPay', alternateName: ['Showpay', 'Show pay'], url: `${domain}/` }
     },
     body: `
@@ -291,7 +291,7 @@ const guideNavigation = `
 for (const page of pages) {
   const canonical = `${domain}${page.route ?? `/${page.filename}`}`;
   const html = `<!doctype html>
-<html lang="en">
+<html lang="en-IN">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -302,6 +302,7 @@ for (const page of pages) {
     <link rel="icon" type="image/png" href="/showpay-logo.png" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="ShowPay" />
+    <meta property="og:locale" content="en_IN" />
     <meta property="og:title" content="${page.title}" />
     <meta property="og:description" content="${page.description}" />
     <meta property="og:url" content="${canonical}" />
@@ -339,6 +340,8 @@ ${guideNavigation}
 const robots = `User-agent: *
 Disallow: /admin
 Disallow: /admin-app/
+# Signed-in account shell only. The $ is required so this does not block /homes.
+Disallow: /home$
 Allow: /
 
 Sitemap: ${domain}/sitemap.xml

@@ -6,7 +6,12 @@
 # Clean URLs — 200 rewrites serve content at clean URL (no loop)
 /showpay-apk                /showpay-apk.html                 200
 /showpay-usdt               /showpay-usdt.html                200
-/homepages                  /homepages.html                   200
+/homepages                  /homes                            301
+/homepages/                 /homes                            301
+/homepages.html             /homes                            301
+/showpay/homepages          /homes                            301
+/showpay/homepages/         /homes                            301
+/showpay/homepages/index.html /homes                          301
 /about-showpay              /about-showpay.html               200
 /showpay-guide              /showpay-guide.html               200
 
