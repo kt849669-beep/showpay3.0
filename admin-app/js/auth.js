@@ -2,31 +2,6 @@
 import { supabase } from "../../user-app/js/config/supabase.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
-  // Orbit has its own server-verified login; normal ShowPay login stays below.
-  try {
-    const response = await fetch('/api/admin/orbit/session', { credentials: 'same-origin', cache: 'no-store' });
-    const session = response.ok ? await response.json() : null;
-    if (session?.authenticated === true) {
-      sessionStorage.setItem('showpay_orbit_login', '1');
-      document.getElementById('logoutBtn')?.addEventListener('click', async () => {
-        try {
-          const logout = await fetch('/api/admin/orbit/logout', {
-            method: 'POST', credentials: 'same-origin',
-            headers: { 'Content-Type': 'application/json', 'X-Showpay-Orbit-CSRF': session.csrf }, body: '{}',
-          });
-          if (!logout.ok) throw new Error('Logout failed. Please retry.');
-          sessionStorage.removeItem('showpay_orbit_login');
-          window.location.href = '/admin';
-        } catch (error) { alert(error.message); }
-      });
-      return;
-    }
-  } catch { /* A standalone deployment can still use its existing login. */ }
-  if (sessionStorage.getItem('showpay_orbit_login')) {
-    sessionStorage.removeItem('showpay_orbit_login');
-    window.location.href = '/admin';
-    return;
-  }
   const sessionToken = localStorage.getItem("showpay_admin_session_token");
   if (!sessionToken) {
     window.location.href = "/admin";

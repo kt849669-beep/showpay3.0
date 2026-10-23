@@ -1,76 +1,50 @@
 /* user-app/css/login.css */
-.showpay-public-main .login-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 430px;
+.login-container {
+  max-width: 400px;
   margin: 0 auto;
+  padding: 20px;
   background: #ffffff;
-  min-height: max(560px, 100vh);
-  min-height: max(560px, 100svh);
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
 }
 
-.showpay-public-main .login-container .login-heading-brand {
-  display: flex;
-  flex: 0 0 44px;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.showpay-public-main .login-container .header {
+.header {
   text-align: center;
-  padding: 0;
-  margin: 0;
-  border: 0;
-  font-size: 17px;
-  line-height: 24px;
+  padding: 10px 0;
+  font-size: 20px;
   font-weight: 600;
-  color: #0381fc;
+  color: #007bff;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 115px;
 }
 
-.login-container #loginForm {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  padding: clamp(76px, 17.53vh, 122px) 16px clamp(32px, 11.5vh, 80px);
-  padding: clamp(76px, 17.53svh, 122px) 16px clamp(32px, 11.5svh, 80px);
+#loginForm {
+  display: block;
 }
 
-.login-container .form-group {
-  flex-shrink: 0;
-  margin-bottom: 22px;
+.form-group {
+  margin-bottom: 20px;
   position: relative;
 }
 
-.login-container .form-group + .form-group {
-  margin-bottom: 14px;
-}
-
-.showpay-public-main .login-container .input-icon {
+.input-icon {
   position: absolute;
-  left: 21px;
+  left: 15px;
   top: 50%;
   transform: translateY(-50%);
   color: #a0a0a0;
   width: 20px;
   height: 20px;
-  stroke-width: 1.7;
-  pointer-events: none;
 }
 
-.login-container .form-control {
-  display: block;
+.form-control {
   width: 100%;
-  height: 54px;
-  padding: 0 16px 0 65px;
+  padding: 16px 16px 16px 45px;
   border: none;
-  background-color: #f8faf9;
-  border-radius: 8px;
-  font-size: 13px;
-  line-height: 20px;
+  background-color: #f8f9fb;
+  border-radius: 12px;
+  font-size: 15px;
   outline: none;
   transition: box-shadow 0.2s;
 }
@@ -79,49 +53,25 @@
   box-shadow: 0 0 0 2px #4da6ff;
 }
 
-.showpay-public-main .login-container .form-control::placeholder {
-  color: #999999;
-  opacity: 1;
+.form-control::placeholder {
+  color: #a0a0a0;
 }
 
-.login-container .forgot-password {
+.forgot-password {
   text-align: right;
-  margin: 0;
-  line-height: 20px;
+  margin-bottom: 40px;
 }
 
-.showpay-public-main .login-container .forgot-password a {
-  color: #3f83db;
+.forgot-password a {
+  color: #007bff;
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
 }
 
-.login-container .login-btn-container {
-  margin-top: auto;
-  padding-top: 32px;
-}
-
-.login-container #loginBtn {
-  display: block;
-  min-height: 52px;
-  padding: 14px 20px;
-  border-radius: 9px;
-  background-color: #80c0fe;
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
-}
-
-/* Match the filled-form reference without changing submission or validation. */
-.login-container:has(#mobile:not(:placeholder-shown)):has(#password:not(:placeholder-shown)) #loginBtn {
-  background-color: #0381fc;
-}
-
-.login-container #errorMessage:not(.hidden) {
-  margin-top: 16px;
-  margin-bottom: 0 !important;
+.login-btn-container {
+  margin-top: 135px;
+  margin-bottom: 0px;
 }
 
 .register-link-container {

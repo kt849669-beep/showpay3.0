@@ -16,15 +16,15 @@ Agar yeh aapka apna project hai aur aap ise samajhna/thik karna chahte hain — 
 
 | Layer | Tech | Reality |
 |---|---|---|
-| User app | Vanilla JS + HTML (`user-app/`) | **LIVE** — Vite static build on Cloudflare Pages |
+| User app | Vanilla JS + HTML (`user-app/`) | **LIVE** — Vite static build, Vercel par |
 | Admin panel | Vanilla JS + HTML (`admin-app/`) | **LIVE** |
 | SEO pages | Generated HTML (`public/`, `seo-generator.cjs`) | **LIVE** |
 | Database | Supabase Postgres, browser se seedha access | **LIVE** |
 | React app (`src/`) | React + TypeScript | **DEAD** — deploy hi nahi hota (react package.json mein hai hi nahi) |
-| Express server (`server.ts`) | Node/Express, in-memory DB | **DEAD** — express installed nahi, current app uses static assets |
+| Express server (`server.ts`) | Node/Express, in-memory DB | **DEAD** — express installed nahi, Vercel static-only hai |
 | Gemini AI | `metadata.json` mein declared | **EXISTS NAHI** — koi code nahi, sirf leftover scaffolding |
 
-**Deploy:** Cloudflare Pages (`npm run build`, output `dist`), connected to GitHub `main`. Existing app rewrites keep `/` → login, `/home` → dashboard, `/admin` → admin login; a scoped Cloudflare worker serves public SEO guides.
+**Deploy:** Vercel, static (`vercel.json` → `outputDirectory: dist`, `framework: null`). Routes rewrites se aate hain: `/` → login, `/home` → dashboard, `/admin` → admin login.
 
 **Bada red flag #1:** poora repo do baar hai — root, aur `showpay-app-login.com/` (byte-identical copy). Har fix do jagah karna padega, ya duplicate delete karo. Aur agar build ke time yeh folder maujood raha, to Vite har page ki **doosri copy** emit kar dega (`showpay-app-login.com/*` URLs) — yeh SEO ke liye duplicate-content disaster hai.
 
@@ -110,7 +110,7 @@ Yeh incidental bug nahi hai — **design hi aisa hai.**
 ### 🟡 MEDIUM
 - Koi rate-limiting/brute-force protection nahi. Password min 4 char.
 - Trash restore lossy hai — insert error ignore karke trash row delete kar deta hai → data loss (`trash.js:37-38`).
-- Verify any future Cloudflare CSP against the external PDF script loaded by `users.html:9` before enforcing it; account/admin script permissions must remain compatible.
+- CSP `cdnjs.cloudflare.com` ko allow nahi karta, jahan se jspdf load hota hai → **production mein har PDF button crash** ho sakta hai (verify karein). (`vercel.json:75` vs `users.html:9`)
 - `server.ts` unauthenticated `/api/admin/*` — agar kabhi deploy hua to aur ek hole.
 
 ### ⚪ LOW / cleanup
@@ -138,7 +138,7 @@ Yeh incidental bug nahi hai — **design hi aisa hai.**
 3. **Hardcoded admin creds hatao + rotate karo.** Admin auth server-side karo.
 4. **Buckets lock karo** — auth-only writes, MIME/size validation.
 5. **Libraries npm se bundle + pin karo (SRI), CSP se `'unsafe-inline'` hatao.**
-6. Review any duplicate `showpay-app-login.com/` checkout separately and protect local environment credentials. Do not publish local credential files in build output.
+6. **Duplicate `showpay-app-login.com/` delete karo**, `.env.local` / `.vercel/*.local` tokens rotate karo (in files mein live Vercel OIDC tokens hain — gitignored hain par duplicate folder mein bhi maujood).
 
 ---
 

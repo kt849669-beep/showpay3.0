@@ -14,10 +14,6 @@ const publicPages = [
   'how-to-deposit-showpay.html',
   'how-to-deposit-usdt-showpay.html',
   'showpay-password-help.html',
-  'homepages.html',
-  'homes.html',
-  'privacy-policy.html',
-  'terms.html',
 ];
 
 const failures = [];
@@ -63,8 +59,9 @@ function validateJsonLd(html, label) {
 
 const login = read('user-app/pages/login.html');
 const loginStyles = read('user-app/css/login.css');
-expect(login.includes('<h1 class="header">LOG IN</h1>'), 'login: missing visible H1');
-expect(loginStyles.includes('min-height: max(560px, 100svh)'), 'login: first view must fill the small mobile viewport');
+expect(login.includes('<h1 class="header">Login</h1>'), 'login: missing visible H1');
+expect(loginStyles.includes('min-height: 100svh'), 'login: first view must fill the small mobile viewport');
+expect(loginStyles.includes('min-height: 100dvh'), 'login: first view must track the dynamic mobile viewport');
 expect(login.includes('history.scrollRestoration = "manual"'), 'login: browser scroll restoration must be disabled');
 expect(login.includes('window.scrollTo(0, 0)'), 'login: page must open at the login view');
 expect(
@@ -76,10 +73,10 @@ expect(
   'login: description is missing or too short',
 );
 expect(login.includes('ShowPay App &amp; Secure Account Access'), 'login: title must cover ShowPay app access');
-expect(login.includes('class="showpay-guide showpay-guide--embedded"'), 'login: missing visible guide content');
-expect(login.includes('<details'), 'login: missing visible FAQ content');
-expect(login.includes('"@type":"FAQPage"'), 'login: missing FAQPage schema');
-for (const link of ['/homes', '/privacy-policy.html', '/terms.html']) {
+expect(login.includes('class="login-seo-content"'), 'login: missing visible SEO answer content');
+expect(login.includes('class="seo-faq"'), 'login: missing visible FAQ content');
+expect(login.includes('"@type": "FAQPage"'), 'login: missing FAQPage schema');
+for (const link of ['/showpay-guide.html', '/showpay-apk', '/showpay-usdt', '/showpay-support.html']) {
   expect(login.includes(`href="${link}"`), `login: missing internal link ${link}`);
 }
 expect(!login.includes('/assets/showpay-og-image.jpg'), 'login: references missing OG image');
@@ -97,8 +94,8 @@ expect(
 );
 
 for (const filename of publicPages) {
-  const html = read(`dist/${filename}`);
-  const label = `dist/${filename}`;
+  const html = read(`public/${filename}`);
+  const label = `public/${filename}`;
   expect(/<meta\b[^>]*name=["']viewport["']/i.test(html), `${label}: missing viewport`);
   expect(
     headValue(html, 'meta', 'name', 'description', 'content').length >= 70,
@@ -107,42 +104,39 @@ for (const filename of publicPages) {
   const canonicalRoutes = {
     'showpay-apk.html': '/showpay-apk',
     'showpay-usdt.html': '/showpay-usdt',
-    'homepages.html': '/homepages',
-    'homes.html': '/homes',
   };
   expect(
     headValue(html, 'link', 'rel', 'canonical', 'href') === `${domain}${canonicalRoutes[filename] ?? `/${filename}`}`,
     `${label}: canonical mismatch`,
   );
-  expect((html.match(/<h1\b/gi) ?? []).length === 1, `${label}: must have one H1`);
-  expect(html.includes('href="/"') || html.includes(`href="${domain}/"`), `${label}: missing login link`);
+  expect(/<h1\b[^>]*>[^<]+<\/h1>/i.test(html), `${label}: missing H1`);
+  expect(html.includes('class="site-header"'), `${label}: missing ShowPay site header`);
+  expect(html.includes('<a class="cta" href="/">ShowPay Login</a>'), `${label}: missing ShowPay login CTA`);
+  expect(html.includes('class="content-section"'), `${label}: missing detailed content section`);
   const visibleText = html
     .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, ' ')
     .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, ' ')
     .replace(/<[^>]+>/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
-  expect(visibleText.split(' ').length >= 100, `${label}: public content missing`);
-  // The legacy /homepages document predates structured data; preserve it unchanged.
-  if (filename !== 'homepages.html') validateJsonLd(html, label);
+  expect(visibleText.split(' ').length >= 300, `${label}: content is too thin`);
+  validateJsonLd(html, label);
 }
 
 expect(fs.statSync(path.join(root, 'public', 'showpay-logo.png')).size > 0, 'public logo is empty');
 
-const sitemap = read('dist/sitemap.xml');
+const sitemap = read('public/sitemap.xml');
 const sitemapLocations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
 const sitemapRoutes = {
   'showpay-apk.html': '/showpay-apk',
   'showpay-usdt.html': '/showpay-usdt',
-  'homepages.html': '/homepages',
-  'homes.html': '/homes',
 };
 const expectedLocations = [
   `${domain}/`,
   ...publicPages.map((page) => `${domain}${sitemapRoutes[page] ?? `/${page}`}`),
 ];
 expect(
-  JSON.stringify([...sitemapLocations].sort()) === JSON.stringify([...expectedLocations].sort()),
+  JSON.stringify(sitemapLocations) === JSON.stringify(expectedLocations),
   `sitemap URLs mismatch: ${sitemapLocations.join(', ')}`,
 );
 expect(!sitemap.includes('/user-app/'), 'sitemap: internal app URL must not be submitted');
@@ -151,8 +145,7 @@ expect(
   'guide hub: missing ShowPay alternate-name entity signal',
 );
 for (const filename of publicPages) {
-  if (['homepages.html','homes.html','privacy-policy.html','terms.html'].includes(filename)) continue;
-  const html = read(`dist/${filename}`);
+  const html = read(`public/${filename}`);
   expect(html.includes('href="/showpay-guide.html"'), `${filename}: missing guide hub link`);
 }
 
@@ -197,7 +190,7 @@ expect(
 // Two files were previously committed with their whole contents appended
 // twice, which broke this audit and overrode the login layout.
 for (const [file, pattern] of [
-  ['user-app/css/login.css', /^\.showpay-public-main \.login-container\s*\{/gm],
+  ['user-app/css/login.css', /^\.login-container\s*\{/gm],
   ['tests/seo-audit.mjs', /^const failures = \[\];/gm],
 ]) {
   const occurrences = (read(file).match(pattern) ?? []).length;
@@ -206,7 +199,7 @@ for (const [file, pattern] of [
 
 // Primary keyword surfaces must stay covered somewhere on the public site.
 const loginText = login.toLowerCase();
-const supportPage = read('dist/showpay-support.html').toLowerCase();
+const supportPage = read('public/showpay-support.html').toLowerCase();
 for (const [term, haystack, label] of [
   ['show pay', loginText, 'login'],
   ['showpay login', loginText, 'login'],
