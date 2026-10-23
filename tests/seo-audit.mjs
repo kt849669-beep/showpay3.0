@@ -14,7 +14,6 @@ const publicPages = [
   'how-to-deposit-showpay.html',
   'how-to-deposit-usdt-showpay.html',
   'showpay-password-help.html',
-  'homepages.html',
   'homes.html',
   'privacy-policy.html',
   'terms.html',
@@ -63,7 +62,10 @@ function validateJsonLd(html, label) {
 
 const login = read('user-app/pages/login.html');
 const loginStyles = read('user-app/css/login.css');
-expect(login.includes('<h1 class="header">LOG IN</h1>'), 'login: missing visible H1');
+expect(login.includes('<h1 id="showpay-login-title">ShowPay Login &amp; Show Pay App Guide</h1>'), 'login: missing descriptive H1');
+expect(login.includes('<p class="header">LOG IN</p>'), 'login: visible LOG IN label missing');
+expect((login.match(/<h1\b/gi) ?? []).length === 1, 'login: must have one H1');
+expect(/<html[^>]*\blang=["']en-IN["']/i.test(login), 'login: lang must be en-IN');
 expect(loginStyles.includes('min-height: max(560px, 100svh)'), 'login: first view must fill the small mobile viewport');
 expect(login.includes('history.scrollRestoration = "manual"'), 'login: browser scroll restoration must be disabled');
 expect(login.includes('window.scrollTo(0, 0)'), 'login: page must open at the login view');
@@ -75,7 +77,7 @@ expect(
   headValue(login, 'meta', 'name', 'description', 'content').length >= 70,
   'login: description is missing or too short',
 );
-expect(login.includes('ShowPay App &amp; Secure Account Access'), 'login: title must cover ShowPay app access');
+expect(login.includes('ShowPay Login – Show Pay App Sign In'), 'login: title must name ShowPay login');
 expect(login.includes('class="showpay-guide showpay-guide--embedded"'), 'login: missing visible guide content');
 expect(login.includes('<details'), 'login: missing visible FAQ content');
 expect(login.includes('"@type":"FAQPage"'), 'login: missing FAQPage schema');
@@ -107,9 +109,9 @@ for (const filename of publicPages) {
   const canonicalRoutes = {
     'showpay-apk.html': '/showpay-apk',
     'showpay-usdt.html': '/showpay-usdt',
-    'homepages.html': '/homepages',
     'homes.html': '/homes',
   };
+  expect(/<html[^>]*\blang=["']en-IN["']/i.test(html), `${label}: lang must be en-IN`);
   expect(
     headValue(html, 'link', 'rel', 'canonical', 'href') === `${domain}${canonicalRoutes[filename] ?? `/${filename}`}`,
     `${label}: canonical mismatch`,
@@ -123,8 +125,7 @@ for (const filename of publicPages) {
     .replace(/\s+/g, ' ')
     .trim();
   expect(visibleText.split(' ').length >= 100, `${label}: public content missing`);
-  // The legacy /homepages document predates structured data; preserve it unchanged.
-  if (filename !== 'homepages.html') validateJsonLd(html, label);
+  validateJsonLd(html, label);
 }
 
 expect(fs.statSync(path.join(root, 'public', 'showpay-logo.png')).size > 0, 'public logo is empty');
@@ -134,7 +135,6 @@ const sitemapLocations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((matc
 const sitemapRoutes = {
   'showpay-apk.html': '/showpay-apk',
   'showpay-usdt.html': '/showpay-usdt',
-  'homepages.html': '/homepages',
   'homes.html': '/homes',
 };
 const expectedLocations = [
@@ -146,12 +146,14 @@ expect(
   `sitemap URLs mismatch: ${sitemapLocations.join(', ')}`,
 );
 expect(!sitemap.includes('/user-app/'), 'sitemap: internal app URL must not be submitted');
+expect(!sitemap.includes('/homepages'), 'sitemap: duplicate /homepages must be omitted');
+expect((sitemap.match(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/g) ?? []).length === sitemapLocations.length, 'sitemap: every URL needs a dated lastmod');
 expect(
   read('public/showpay-guide.html').includes('alternateName'),
   'guide hub: missing ShowPay alternate-name entity signal',
 );
 for (const filename of publicPages) {
-  if (['homepages.html','homes.html','privacy-policy.html','terms.html'].includes(filename)) continue;
+  if (['homes.html','privacy-policy.html','terms.html'].includes(filename)) continue;
   const html = read(`dist/${filename}`);
   expect(html.includes('href="/showpay-guide.html"'), `${filename}: missing guide hub link`);
 }
@@ -159,6 +161,8 @@ for (const filename of publicPages) {
 const robots = read('public/robots.txt');
 expect(robots.includes(`Sitemap: ${domain}/sitemap.xml`), 'robots: sitemap directive missing');
 expect(robots.includes('Disallow: /admin'), 'robots: admin disallow missing');
+expect(robots.includes('Disallow: /home$'), 'robots: signed-in /home disallow missing');
+expect(!/^Disallow:\s*\/home\s*$/m.test(robots), 'robots: a prefix Disallow /home would also block /homes');
 
 // --- Regressions that previously cost organic visibility -------------------
 
